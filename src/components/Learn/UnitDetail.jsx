@@ -101,53 +101,6 @@ const BackButton = ({ onClick, label }) => (
 const UnitDetail = ({ unitId, onBack }) => {
     const iconStyle = { verticalAlign: 'middle', marginRight: '8px', opacity: 0.8 };
 
-    // Interactive Check State (Unit 2)
-    const [answers, setAnswers] = useState({ q1: null, q2: null, q3: null });
-
-    const handleCheck = (q, isCorrect) => {
-        if (answers[q] !== null) return; // Prevent changing answer
-        setAnswers(prev => ({ ...prev, [q]: isCorrect }));
-    };
-
-    const QButton = ({ qId, label, isCorrect }) => {
-        const status = answers[qId];
-        const isSelected = status !== null;
-        let btnStyle = {
-            flex: 1,
-            padding: '0.75rem',
-            borderRadius: '12px',
-            border: '1px solid var(--border-color)',
-            background: 'var(--card-bg)',
-            color: 'var(--text-color)',
-            cursor: isSelected ? 'default' : 'pointer',
-            fontWeight: 600,
-            transition: 'all 0.2s',
-            opacity: isSelected && !isCorrect && status === isCorrect ? 0.5 : 1
-        };
-
-        if (isSelected) {
-            if (isCorrect) {
-                btnStyle.background = 'rgba(34, 197, 94, 0.1)';
-                btnStyle.borderColor = '#22C55E';
-                btnStyle.color = '#166534';
-            } else if (status === isCorrect) { // This was the wrong answer picked
-                btnStyle.background = 'rgba(239, 68, 68, 0.1)';
-                btnStyle.borderColor = '#EF4444';
-                btnStyle.color = '#991B1B';
-            }
-        }
-
-        return (
-            <button
-                style={btnStyle}
-                onClick={() => handleCheck(qId, isCorrect)}
-                disabled={isSelected}
-            >
-                {label}
-            </button>
-        );
-    };
-
     return (
         <motion.section
             className="section active"
@@ -279,9 +232,9 @@ const UnitDetail = ({ unitId, onBack }) => {
                             </div>
 
                             <div style={{ background: 'rgba(79, 70, 229, 0.05)', padding: '1rem', borderRadius: '12px', borderLeft: '4px solid var(--primary-color)' }}>
-                                <div style={{ fontWeight: 800, color: 'var(--primary-color)', marginBottom: '4px' }}>[?] Question</div>
-                                <div style={{ fontSize: '1.1rem' }}>Ти лекар <strong>ли си</strong>? <span style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>(Are you a doctor?)</span></div>
-                                <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginTop: '4px' }}>* "ли" spotlights the word before it. Spotlight "doctor".</div>
+                                <div style={{ fontWeight: 800, color: 'var(--primary-color)', marginBottom: '4px' }}>[?] Question (The 'Ли' Particle)</div>
+                                <div style={{ fontSize: '1.1rem' }}>Ти лекар <strong>ли</strong> си? <span style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>(Are you a doctor?)</span></div>
+                                <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginTop: '4px' }}>* Bulgarian doesn't change word order for questions. Instead, it adds the particle "ли".</div>
                             </div>
                         </div>
                     </motion.div>
@@ -323,55 +276,35 @@ const UnitDetail = ({ unitId, onBack }) => {
                         </table>
                     </motion.div>
 
-                    {/* SECTION 3: Gamified Check */}
+                    {/* SECTION 3: The 'Li' Spotlight Rules */}
                     <motion.h3 className="section-title" style={{ marginTop: '2rem', display: 'flex', alignItems: 'center', gap: '8px' }} variants={itemVariants}>
-                        🏆 Interactive Check
+                        <Search size={20} color="var(--accent-color)" /> Detailed Look: Focusing with 'Ли'
                     </motion.h3>
-                    <motion.div className="card" variants={itemVariants} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-
-                        {/* Q1 */}
+                    <motion.div className="card" variants={itemVariants} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', lineHeight: '1.6' }}>
                         <div>
-                            <div style={{ fontWeight: 700, marginBottom: '0.75rem' }}>1. How do you ask: "Are you an engineer?"</div>
-                            <div style={{ display: 'flex', gap: '0.5rem', flexDirection: 'column' }}>
-                                <QButton qId="q1" label="Ти ли си инженер?" isCorrect={false} />
-                                <QButton qId="q1" label="Ти инженер ли си?" isCorrect={true} />
-                            </div>
-                            {answers.q1 !== null && (
-                                <div style={{ marginTop: '0.5rem', fontSize: '0.85rem', color: answers.q1 ? '#22C55E' : '#EF4444', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                                    {answers.q1 ? <CheckCircle2 size={14} /> : <XCircle size={14} />}
-                                    {answers.q1 ? "Correct! 'ли' follows the focus word (engineer)." : "Incorrect. 'ли' should follow 'engineer' to spotlight it."}
-                                </div>
-                            )}
+                            <div style={{ fontWeight: 700, marginBottom: '0.5rem', color: 'var(--accent-color)' }}>The Golden Rule</div>
+                            <div>The <strong>ли</strong> particle always goes <strong>immediately after</strong> the word you want to ask about (the focus of the question). It cannot start a sentence.</div>
                         </div>
 
-                        {/* Q2 */}
-                        <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '1.5rem' }}>
-                            <div style={{ fontWeight: 700, marginBottom: '0.75rem' }}>2. "I am not from England."</div>
-                            <div style={{ display: 'flex', gap: '0.5rem', flexDirection: 'column' }}>
-                                <QButton qId="q2" label="Аз не съм от Англия." isCorrect={true} />
-                                <QButton qId="q2" label="Аз съм не от Англия." isCorrect={false} />
-                            </div>
-                            {answers.q2 !== null && (
-                                <div style={{ marginTop: '0.5rem', fontSize: '0.85rem', color: answers.q2 ? '#22C55E' : '#EF4444', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                                    {answers.q2 ? <CheckCircle2 size={14} /> : <XCircle size={14} />}
-                                    {answers.q2 ? "Correct! 'не' goes right before 'съм'." : "Incorrect. 'не' must immediately precede the verb 'съм'."}
-                                </div>
-                            )}
+                        <div style={{ padding: '1rem', borderRadius: '12px', border: '1px dashed var(--border-color)', background: 'rgba(255,255,255,0.02)' }}>
+                            <div style={{ fontWeight: 700, marginBottom: '0.5rem', color: '#60A5FA' }}>1. Asking about the Profession/Noun (Most Common)</div>
+                            <div>If you want to focus on "doctor", place "ли" right after it. The verb "съм" follows the particle.</div>
+                            <div style={{ fontSize: '1.1rem', marginTop: '0.5rem' }}>Ти <strong>лекар ли</strong> си?</div>
+                            <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>(Are you a <em>doctor</em>?)</div>
                         </div>
 
-                        {/* Q3 */}
-                        <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '1.5rem' }}>
-                            <div style={{ fontWeight: 700, marginBottom: '0.75rem' }}>3. Plural of "ресторант" (restaurant - masculine):</div>
-                            <div style={{ display: 'flex', gap: '0.5rem' }}>
-                                <QButton qId="q3" label="ресторанта" isCorrect={false} />
-                                <QButton qId="q3" label="ресторанти" isCorrect={true} />
-                            </div>
-                            {answers.q3 !== null && (
-                                <div style={{ marginTop: '0.5rem', fontSize: '0.85rem', color: answers.q3 ? '#22C55E' : '#EF4444', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                                    {answers.q3 ? <CheckCircle2 size={14} /> : <XCircle size={14} />}
-                                    {answers.q3 ? "Correct! Masculine nouns ending in a consonant take '-и'." : "Incorrect. Ends in a consonant, so it takes '-и'."}
-                                </div>
-                            )}
+                        <div style={{ padding: '1rem', borderRadius: '12px', border: '1px dashed var(--border-color)', background: 'rgba(255,255,255,0.02)' }}>
+                            <div style={{ fontWeight: 700, marginBottom: '0.5rem', color: '#F472B6' }}>2. Asking about the Verb (Action)</div>
+                            <div>For normal verbs (like reading, working), place "ли" after the verb to ask if the action is happening.</div>
+                            <div style={{ fontSize: '1.1rem', marginTop: '0.5rem' }}>Ти <strong>четиш ли</strong> книга?</div>
+                            <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>(Are you <em>reading</em> a book?)</div>
+                        </div>
+
+                        <div style={{ padding: '1rem', borderRadius: '12px', border: '1px dashed var(--border-color)', background: 'rgba(255,255,255,0.02)' }}>
+                            <div style={{ fontWeight: 700, marginBottom: '0.5rem', color: '#A78BFA' }}>3. Asking about the Subject (Who)</div>
+                            <div>If you want to know if *you* (specifically) are doing it, place "ли" after the pronoun.</div>
+                            <div style={{ fontSize: '1.1rem', marginTop: '0.5rem' }}><strong>Ти ли</strong> си лекар?</div>
+                            <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>(Are <em>you</em> the doctor?)</div>
                         </div>
 
                     </motion.div>
