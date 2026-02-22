@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import {
     Coffee, Sun, Moon, MessageSquare, Handshake,
     User, ThumbsUp, Smile, HelpCircle, MapPin,
-    Compass, Stethoscope, GraduationCap, HardHat, Car, Briefcase, Search, ChevronLeft
+    Compass, Stethoscope, GraduationCap, HardHat, Car, Briefcase, Search, ChevronLeft,
+    CheckCircle2, XCircle, Target, BookOpen, Layers
 } from 'lucide-react';
 import { containerVariants, itemVariants } from '../../data/animations';
 
@@ -100,6 +101,53 @@ const BackButton = ({ onClick, label }) => (
 const UnitDetail = ({ unitId, onBack }) => {
     const iconStyle = { verticalAlign: 'middle', marginRight: '8px', opacity: 0.8 };
 
+    // Interactive Check State (Unit 2)
+    const [answers, setAnswers] = useState({ q1: null, q2: null, q3: null });
+
+    const handleCheck = (q, isCorrect) => {
+        if (answers[q] !== null) return; // Prevent changing answer
+        setAnswers(prev => ({ ...prev, [q]: isCorrect }));
+    };
+
+    const QButton = ({ qId, label, isCorrect }) => {
+        const status = answers[qId];
+        const isSelected = status !== null;
+        let btnStyle = {
+            flex: 1,
+            padding: '0.75rem',
+            borderRadius: '12px',
+            border: '1px solid var(--border-color)',
+            background: 'var(--card-bg)',
+            color: 'var(--text-color)',
+            cursor: isSelected ? 'default' : 'pointer',
+            fontWeight: 600,
+            transition: 'all 0.2s',
+            opacity: isSelected && !isCorrect && status === isCorrect ? 0.5 : 1
+        };
+
+        if (isSelected) {
+            if (isCorrect) {
+                btnStyle.background = 'rgba(34, 197, 94, 0.1)';
+                btnStyle.borderColor = '#22C55E';
+                btnStyle.color = '#166534';
+            } else if (status === isCorrect) { // This was the wrong answer picked
+                btnStyle.background = 'rgba(239, 68, 68, 0.1)';
+                btnStyle.borderColor = '#EF4444';
+                btnStyle.color = '#991B1B';
+            }
+        }
+
+        return (
+            <button
+                style={btnStyle}
+                onClick={() => handleCheck(qId, isCorrect)}
+                disabled={isSelected}
+            >
+                {label}
+            </button>
+        );
+    };
+
     return (
         <motion.section
             className="section active"
@@ -112,11 +160,12 @@ const UnitDetail = ({ unitId, onBack }) => {
             </motion.div>
 
             <motion.div className="card" style={{ textAlign: 'center' }} variants={itemVariants}>
-                <h2 style={{ margin: 0 }}>
-                    {unitId === 1 ? 'Unit 1: Приятно ми е!' : 'Unit 2: Кой е това?'}
+                <h2 style={{ margin: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+                    {unitId === 1 && 'Unit 1: Приятно ми е!'}
+                    {unitId === 2 && <><Target size={28} color="var(--accent-color)" /> Module: The 'Li' Spotlight & Plurals</>}
                 </h2>
-                <div style={{ color: 'var(--text-secondary)' }}>
-                    {unitId === 1 ? 'Nice to meet you!' : 'Who is this? • Professions & Questions'}
+                <div style={{ color: 'var(--text-secondary)', marginTop: '4px' }}>
+                    {unitId === 1 ? 'Nice to meet you!' : 'Zero fluff. Pure mechanics.'}
                 </div>
             </motion.div>
 
@@ -212,121 +261,119 @@ const UnitDetail = ({ unitId, onBack }) => {
 
             {unitId === 2 && (
                 <>
-                    <motion.h3 className="section-title" style={{ marginTop: '1.5rem' }} variants={itemVariants}>Grammar: Negatives & Questions</motion.h3>
+                    {/* SECTION 1: Grammer Rules */}
+                    <motion.h3 className="section-title" style={{ marginTop: '1.5rem', display: 'flex', alignItems: 'center', gap: '8px' }} variants={itemVariants}>
+                        <BookOpen size={20} color="var(--accent-color)" /> Grammar: The 'Li' Formula
+                    </motion.h3>
                     <motion.div className="card" variants={itemVariants}>
-                        <table className="grammar-table">
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                            <div style={{ background: 'rgba(34, 197, 94, 0.05)', padding: '1rem', borderRadius: '12px', borderLeft: '4px solid #22C55E' }}>
+                                <div style={{ fontWeight: 800, color: '#166534', marginBottom: '4px' }}>[+] Positive</div>
+                                <div style={{ fontSize: '1.1rem' }}>Аз <strong>съм</strong> лекар. <span style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>(I am a doctor)</span></div>
+                            </div>
+
+                            <div style={{ background: 'rgba(239, 68, 68, 0.05)', padding: '1rem', borderRadius: '12px', borderLeft: '4px solid #EF4444' }}>
+                                <div style={{ fontWeight: 800, color: '#991B1B', marginBottom: '4px' }}>[-] Negative</div>
+                                <div style={{ fontSize: '1.1rem' }}>Аз <strong>не съм</strong> лекар. <span style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>(I am not a doctor)</span></div>
+                                <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginTop: '4px' }}>* Put "не" right before "съм".</div>
+                            </div>
+
+                            <div style={{ background: 'rgba(79, 70, 229, 0.05)', padding: '1rem', borderRadius: '12px', borderLeft: '4px solid var(--primary-color)' }}>
+                                <div style={{ fontWeight: 800, color: 'var(--primary-color)', marginBottom: '4px' }}>[?] Question</div>
+                                <div style={{ fontSize: '1.1rem' }}>Ти лекар <strong>ли си</strong>? <span style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>(Are you a doctor?)</span></div>
+                                <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginTop: '4px' }}>* "ли" spotlights the word before it. Spotlight "doctor".</div>
+                            </div>
+                        </div>
+                    </motion.div>
+
+                    {/* SECTION 2: Cheat Sheet */}
+                    <motion.h3 className="section-title" style={{ marginTop: '1.5rem', display: 'flex', alignItems: 'center', gap: '8px' }} variants={itemVariants}>
+                        <Layers size={20} color="var(--accent-color)" /> Cheat Sheet: Plural Rules
+                    </motion.h3>
+                    <motion.div className="card" variants={itemVariants} style={{ padding: '0', overflow: 'hidden' }}>
+                        <table className="grammar-table" style={{ margin: 0 }}>
                             <thead>
-                                <tr>
-                                    <th style={{ color: 'var(--accent-color)' }}>Type</th>
-                                    <th style={{ color: 'var(--accent-color)' }}>Bulgarian</th>
-                                    <th style={{ color: 'var(--accent-color)' }}>English</th>
+                                <tr style={{ background: '#12151A' }}>
+                                    <th style={{ padding: '1rem' }}>Gender</th>
+                                    <th>Ends in...</th>
+                                    <th>Plural</th>
+                                    <th>Example</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody style={{ fontSize: '0.95rem' }}>
                                 <tr>
-                                    <td>Positive (+)</td>
-                                    <td>Аз <strong>съм</strong> лекар.</td>
-                                    <td>I am a doctor.</td>
+                                    <td style={{ padding: '1rem', fontWeight: 600, color: '#60A5FA' }}>M</td>
+                                    <td>Consonant</td>
+                                    <td><strong>-и</strong></td>
+                                    <td>студент → студент<strong>и</strong></td>
+                                </tr>
+                                <tr style={{ background: 'rgba(255,255,255,0.02)' }}>
+                                    <td style={{ padding: '1rem', fontWeight: 600, color: '#F472B6' }}>F</td>
+                                    <td>-а / -я</td>
+                                    <td><strong>-и</strong></td>
+                                    <td>жена → жен<strong>и</strong></td>
                                 </tr>
                                 <tr>
-                                    <td>Negative (-)</td>
-                                    <td>Аз <strong>не съм</strong> лекар.</td>
-                                    <td>I am <strong>not</strong> a doctor.</td>
-                                </tr>
-                                <tr>
-                                    <td>Question (?)</td>
-                                    <td>Ти лекар <strong>ли си</strong>?</td>
-                                    <td><strong>Are</strong> you a doctor?</td>
+                                    <td style={{ padding: '1rem', fontWeight: 600, color: '#A78BFA' }}>N</td>
+                                    <td>-о / -е</td>
+                                    <td><strong>-а / -я</strong></td>
+                                    <td>село → сел<strong>а</strong></td>
                                 </tr>
                             </tbody>
                         </table>
-                        <div style={{ marginTop: '1rem', color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
-                            <div>* Put "<strong>ли</strong>" after the word you are asking about.</div>
-                            <div>* Put "<strong>не</strong>" before the verb "съм".</div>
-                        </div>
                     </motion.div>
 
-                    <motion.h3 className="section-title" style={{ marginTop: '1.5rem' }} variants={itemVariants}>Question Words</motion.h3>
-                    <motion.div className="card" variants={itemVariants}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
-                            <div>
-                                <div style={{ fontWeight: 700, fontSize: '1.1rem' }}>Кой е това?</div>
-                                <div style={{ color: 'var(--text-secondary)' }}>Who is this?</div>
+                    {/* SECTION 3: Gamified Check */}
+                    <motion.h3 className="section-title" style={{ marginTop: '2rem', display: 'flex', alignItems: 'center', gap: '8px' }} variants={itemVariants}>
+                        🏆 Interactive Check
+                    </motion.h3>
+                    <motion.div className="card" variants={itemVariants} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+
+                        {/* Q1 */}
+                        <div>
+                            <div style={{ fontWeight: 700, marginBottom: '0.75rem' }}>1. How do you ask: "Are you an engineer?"</div>
+                            <div style={{ display: 'flex', gap: '0.5rem', flexDirection: 'column' }}>
+                                <QButton qId="q1" label="Ти ли си инженер?" isCorrect={false} />
+                                <QButton qId="q1" label="Ти инженер ли си?" isCorrect={true} />
                             </div>
-                            <div><Search size={24} color="var(--accent-color)" /></div>
+                            {answers.q1 !== null && (
+                                <div style={{ marginTop: '0.5rem', fontSize: '0.85rem', color: answers.q1 ? '#22C55E' : '#EF4444', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                                    {answers.q1 ? <CheckCircle2 size={14} /> : <XCircle size={14} />}
+                                    {answers.q1 ? "Correct! 'ли' follows the focus word (engineer)." : "Incorrect. 'ли' should follow 'engineer' to spotlight it."}
+                                </div>
+                            )}
                         </div>
-                    </motion.div>
-                    <motion.div className="card" variants={itemVariants}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
-                            <div>
-                                <div style={{ fontWeight: 700, fontSize: '1.1rem' }}>Откъде сте?</div>
-                                <div style={{ color: 'var(--text-secondary)' }}>Where are you from?</div>
+
+                        {/* Q2 */}
+                        <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '1.5rem' }}>
+                            <div style={{ fontWeight: 700, marginBottom: '0.75rem' }}>2. "I am not from England."</div>
+                            <div style={{ display: 'flex', gap: '0.5rem', flexDirection: 'column' }}>
+                                <QButton qId="q2" label="Аз не съм от Англия." isCorrect={true} />
+                                <QButton qId="q2" label="Аз съм не от Англия." isCorrect={false} />
                             </div>
-                            <div><MapPin size={24} color="var(--accent-color)" /></div>
+                            {answers.q2 !== null && (
+                                <div style={{ marginTop: '0.5rem', fontSize: '0.85rem', color: answers.q2 ? '#22C55E' : '#EF4444', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                                    {answers.q2 ? <CheckCircle2 size={14} /> : <XCircle size={14} />}
+                                    {answers.q2 ? "Correct! 'не' goes right before 'съм'." : "Incorrect. 'не' must immediately precede the verb 'съм'."}
+                                </div>
+                            )}
                         </div>
-                    </motion.div>
-                    <motion.div className="card" variants={itemVariants}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <div>
-                                <div style={{ fontWeight: 700, fontSize: '1.1rem' }}>Къде е...?</div>
-                                <div style={{ color: 'var(--text-secondary)' }}>Where is...?</div>
+
+                        {/* Q3 */}
+                        <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '1.5rem' }}>
+                            <div style={{ fontWeight: 700, marginBottom: '0.75rem' }}>3. Plural of "ресторант" (restaurant - masculine):</div>
+                            <div style={{ display: 'flex', gap: '0.5rem' }}>
+                                <QButton qId="q3" label="ресторанта" isCorrect={false} />
+                                <QButton qId="q3" label="ресторанти" isCorrect={true} />
                             </div>
-                            <div><Compass size={24} color="var(--accent-color)" /></div>
+                            {answers.q3 !== null && (
+                                <div style={{ marginTop: '0.5rem', fontSize: '0.85rem', color: answers.q3 ? '#22C55E' : '#EF4444', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                                    {answers.q3 ? <CheckCircle2 size={14} /> : <XCircle size={14} />}
+                                    {answers.q3 ? "Correct! Masculine nouns ending in a consonant take '-и'." : "Incorrect. Ends in a consonant, so it takes '-и'."}
+                                </div>
+                            )}
                         </div>
-                    </motion.div>
 
-                    <motion.h3 className="section-title" style={{ marginTop: '1.5rem' }} variants={itemVariants}>Sentences & Examples</motion.h3>
-                    <motion.div className="card" variants={itemVariants}>
-                        <div style={{ fontWeight: 700, marginBottom: '0.5rem' }}>Asking "Is he/she...?"</div>
-                        <ul style={{ margin: 0, paddingLeft: '1.25rem', lineHeight: 1.8 }}>
-                            <li>Той <strong>лекар ли е</strong>? (Is he a doctor?)</li>
-                            <li>Тя <strong>от Франция ли е</strong>? (Is she from France?)</li>
-                            <li>Вие <strong>учители ли сте</strong>? (Are you teachers?)</li>
-                        </ul>
-                    </motion.div>
-                    <motion.div className="card" variants={itemVariants}>
-                        <div style={{ fontWeight: 700, marginBottom: '0.5rem', color: '#EF4444' }}>Negative Answers</div>
-                        <ul style={{ margin: 0, paddingLeft: '1.25rem', lineHeight: 1.8 }}>
-                            <li>Не, той <strong>не е</strong> лекар. (No, he is not a doctor.)</li>
-                            <li>Не, тя <strong>не е</strong> от Франция. (No, she is not from France.)</li>
-                            <li>Аз <strong>не съм</strong> инженер. (I am not an engineer.)</li>
-                        </ul>
-                    </motion.div>
-
-                    <motion.h3 className="section-title" style={{ marginTop: '1.5rem' }} variants={itemVariants}>Dialogues</motion.h3>
-                    <motion.div className="card" variants={itemVariants}>
-                        <div style={{ color: 'var(--accent-color)', fontWeight: 600, marginBottom: '0.5rem', fontSize: '0.85rem', textTransform: 'uppercase' }}>
-                            Dialogue 1: Formal Introduction
-                        </div>
-                        <div style={{ lineHeight: 1.8 }}>
-                            <div>— <strong>Вие от Англия ли сте?</strong> (Are you from England?)</div>
-                            <div>— <strong>Не, не съм от Англия. Аз съм от Америка.</strong> (No, I am not from England. I am from America.)</div>
-                            <div>— <strong>А вие?</strong> (And you?)</div>
-                            <div>— <strong>Аз съм от България.</strong> (I am from Bulgaria.)</div>
-                        </div>
-                    </motion.div>
-                    <motion.div className="card" variants={itemVariants}>
-                        <div style={{ color: 'var(--accent-color)', fontWeight: 600, marginBottom: '0.5rem', fontSize: '0.85rem', textTransform: 'uppercase' }}>
-                            Dialogue 2: Professions
-                        </div>
-                        <div style={{ lineHeight: 1.8 }}>
-                            <div>— <strong>Вие инженер ли сте?</strong> (Are you an engineer?)</div>
-                            <div>— <strong>Не, не съм инженер. Аз съм архитект.</strong> (No, I am not an engineer. I am an architect.)</div>
-                            <div>— <strong>А това кой е?</strong> (And who is this?)</div>
-                            <div>— <strong>Това е моят колега Иван. Той е инженер.</strong> (This is my colleague Ivan. He is an engineer.)</div>
-                        </div>
-                    </motion.div>
-
-                    <motion.h3 className="section-title" style={{ marginTop: '1.5rem' }} variants={itemVariants}>Professions (Професии)</motion.h3>
-                    <motion.div className="card" variants={itemVariants}>
-                        <div style={{ lineHeight: 2 }}>
-                            <div><Stethoscope size={16} style={iconStyle} /> <strong>Лекар / Лекарка</strong> — Doctor</div>
-                            <div><GraduationCap size={16} style={iconStyle} /> <strong>Учител / Учителка</strong> — Teacher</div>
-                            <div><User size={16} style={iconStyle} /> <strong>Студент / Студентка</strong> — Student</div>
-                            <div><HardHat size={16} style={iconStyle} /> <strong>Инженер</strong> — Engineer</div>
-                            <div><Car size={16} style={iconStyle} /> <strong>Шофьор</strong> — Driver</div>
-                            <div><Briefcase size={16} style={iconStyle} /> <strong>Бизнесмен / Бизнесдама</strong> — Businessman/woman</div>
-                        </div>
                     </motion.div>
                 </>
             )}
