@@ -95,16 +95,32 @@ const QuizGame = ({ topicId, onBack }) => {
         else if (topicId === 'professions') data = quizProfessions;
         else if (topicId === 'unit2grammar') data = quizUnit2Grammar;
 
+        // Deep-copy and shuffle questions, then randomize option order per question
         const processedQuestions = shuffleArray(data).map(question => {
-            const optionsObjs = question.o.map((opt, idx) => ({
-                text: opt,
-                isCorrect: idx === question.c
-            }));
-            const shuffledOptionsObjs = shuffleArray(optionsObjs);
+            const correctText = question.o[question.c];
+            const wrongTexts = question.o.filter((_, idx) => idx !== question.c);
+
+            // Shuffle wrong answers
+            const shuffledWrong = shuffleArray(wrongTexts);
+
+            // Pick a random position for the correct answer
+            const correctPos = Math.floor(Math.random() * question.o.length);
+
+            // Build the new options array with the correct answer at the random position
+            const newOptions = [];
+            let wrongIdx = 0;
+            for (let i = 0; i < question.o.length; i++) {
+                if (i === correctPos) {
+                    newOptions.push(correctText);
+                } else {
+                    newOptions.push(shuffledWrong[wrongIdx++]);
+                }
+            }
+
             return {
                 ...question,
-                o: shuffledOptionsObjs.map(opt => opt.text),
-                c: shuffledOptionsObjs.findIndex(opt => opt.isCorrect)
+                o: newOptions,
+                c: correctPos
             };
         });
 
