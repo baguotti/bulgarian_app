@@ -15,8 +15,8 @@ export const vocabulary = [
     { bg: "нула", lat: "<strong>nu</strong>la", en: "zero", cat: "Numbers" },
 
     // Colors
-    { bg: "червен", lat: "<strong>cher</strong>ven", en: "red", cat: "Colors" }, { bg: "син", lat: "<strong>sin</strong>", en: "blue", cat: "Colors" }, { bg: "зелен", lat: "ze<strong>len</strong>", en: "green", cat: "Colors" },
-    { bg: "жълт", lat: "<strong>zhalt</strong>", en: "yellow", cat: "Colors" }, { bg: "черен", lat: "<strong>che</strong>ren", en: "black", cat: "Colors" }, { bg: "бял", lat: "<strong>byal</strong>", en: "white", cat: "Colors" },
+    { bg: "червен", lat: "cher<strong>ven</strong>", en: "red", cat: "Colors" }, { bg: "син", lat: "<strong>sin</strong>", en: "blue", cat: "Colors" }, { bg: "зелен", lat: "ze<strong>len</strong>", en: "green", cat: "Colors" },
+    { bg: "жълт", lat: "<strong>zhalt</strong>", en: "yellow", cat: "Colors" }, { bg: "черен", lat: "che<strong>ren</strong>", en: "black", cat: "Colors" }, { bg: "бял", lat: "<strong>byal</strong>", en: "white", cat: "Colors" },
     { bg: "оранжев", lat: "o<strong>ran</strong>zhev", en: "orange", cat: "Colors" }, { bg: "розов", lat: "<strong>ro</strong>zov", en: "pink", cat: "Colors" },
     { bg: "лилав", lat: "<strong>li</strong>lav", en: "purple", cat: "Colors" }, { bg: "кафяв", lat: "ka<strong>fyav</strong>", en: "brown", cat: "Colors" },
     { bg: "сив", lat: "<strong>siv</strong>", en: "grey", cat: "Colors" }, { bg: "бежов", lat: "<strong>be</strong>zhov", en: "beige", cat: "Colors" },
@@ -48,7 +48,7 @@ export const vocabulary = [
     { bg: "захар", lat: "<strong>za</strong>har", en: "sugar", cat: "Food" }, { bg: "сол", lat: "<strong>sol</strong>", en: "salt", cat: "Food" }, { bg: "чай", lat: "<strong>chay</strong>", en: "tea", cat: "Food" },
     { bg: "пиле", lat: "<strong>pi</strong>le", en: "chicken", cat: "Food" }, { bg: "свинско", lat: "<strong>svin</strong>sko", en: "pork", cat: "Food" },
     { bg: "телешко", lat: "<strong>te</strong>leshko", en: "beef", cat: "Food" }, { bg: "салата", lat: "sa<strong>la</strong>ta", en: "salad", cat: "Food" },
-    { bg: "супа", lat: "<strong>su</strong>pa", en: "soup", cat: "Food" }, { bg: "масло", lat: "mas<strong>lo</strong>", en: "butter", cat: "Food" },
+    { bg: "супа", lat: "<strong>su</strong>pa", en: "soup", cat: "Food" }, { bg: "масло", lat: "<strong>mas</strong>lo", en: "butter", cat: "Food" },
     { bg: "яйце", lat: "yay<strong>tse</strong>", en: "egg", cat: "Food" }, { bg: "кисело мляко", lat: "<strong>ki</strong>selo <strong>mlya</strong>ko", en: "yogurt", cat: "Food" },
     { bg: "вино", lat: "<strong>vi</strong>no", en: "wine", cat: "Food" }, { bg: "бира", lat: "<strong>bi</strong>ra", en: "beer", cat: "Food" },
     { bg: "кафе", lat: "ka<strong>fe</strong>", en: "coffee", cat: "Food" }, { bg: "сок", lat: "<strong>sok</strong>", en: "juice", cat: "Food" },

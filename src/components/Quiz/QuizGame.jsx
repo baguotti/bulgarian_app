@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { quizToBe, quizNationalities, quizProfessions, quizUnit2Grammar } from '../../data/quizzes';
+import { quizToBe, quizNationalities, quizProfessions, quizUnit2Beginner, quizUnit2Intermediate, quizUnit2Advanced } from '../../data/quizzes';
 import { Trophy, Star, ThumbsUp, Dumbbell, ArrowLeft } from 'lucide-react';
 import { triggerHaptic } from '../../utils/haptics';
 
@@ -86,14 +86,54 @@ const QuizGame = ({ topicId, onBack }) => {
     const [finished, setFinished] = useState(false);
     const [answered, setAnswered] = useState(false);
     const [selectedOption, setSelectedOption] = useState(null);
+    const timeoutRef = useRef(null);
+
+    // Cleanup timeout on unmount
+    useEffect(() => {
+        return () => {
+            if (timeoutRef.current) clearTimeout(timeoutRef.current);
+        };
+    }, []);
+
+    // Save state to localStorage whenever it changes
+    useEffect(() => {
+        if (questions.length > 0) {
+            localStorage.setItem(`bulgarian_quiz_${topicId}`, JSON.stringify({
+                questions,
+                currentIdx,
+                score,
+                finished
+            }));
+        }
+    }, [questions, currentIdx, score, finished, topicId]);
 
     // Initialize Quiz
     useEffect(() => {
+        const savedState = localStorage.getItem(`bulgarian_quiz_${topicId}`);
+        if (savedState) {
+            try {
+                const parsed = JSON.parse(savedState);
+                if (!parsed.finished) {
+                    setQuestions(parsed.questions);
+                    setCurrentIdx(parsed.currentIdx);
+                    setScore(parsed.score);
+                    setFinished(parsed.finished);
+                    setAnswered(false);
+                    setSelectedOption(null);
+                    return;
+                }
+            } catch (e) {
+                console.error("Failed to parse saved quiz state", e);
+            }
+        }
+
         let data = [];
         if (topicId === 'tobe') data = quizToBe;
         else if (topicId === 'nationalities') data = quizNationalities;
         else if (topicId === 'professions') data = quizProfessions;
-        else if (topicId === 'unit2grammar') data = quizUnit2Grammar;
+        else if (topicId === 'unit2beginner') data = quizUnit2Beginner;
+        else if (topicId === 'unit2intermediate') data = quizUnit2Intermediate;
+        else if (topicId === 'unit2advanced') data = quizUnit2Advanced;
 
         // Deep-copy and shuffle questions, then randomize option order per question
         const processedQuestions = shuffleArray(data).map(question => {
@@ -140,10 +180,11 @@ const QuizGame = ({ topicId, onBack }) => {
 
         const isCorrect = index === questions[currentIdx].c;
         triggerHaptic(isCorrect ? 'success' : 'error');
-        if (isCorrect) setScore(s => s + 1);
 
         // Auto move next
-        setTimeout(() => {
+        timeoutRef.current = setTimeout(() => {
+            if (isCorrect) setScore(s => s + 1);
+            
             if (currentIdx + 1 >= questions.length) {
                 setFinished(true);
             } else {
