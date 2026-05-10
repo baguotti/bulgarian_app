@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import QuizGame from '../Quiz/QuizGame';
-import { FileText, Globe, Briefcase, HelpCircle, ChevronLeft } from 'lucide-react';
+import { FileText, Globe, Briefcase, HelpCircle, ChevronLeft, ShoppingCart } from 'lucide-react';
 import { containerVariants, itemVariants } from '../../data/animations';
 import practiceBg from '../../assets/practice-bg-v3.webp';
 
@@ -142,6 +142,37 @@ const PracticeSection = ({ resetCounter }) => {
                                         { id: 'unit2beginner', label: 'Beginner', meta: 'Negation — не съм, не си, не е...', color: '#22C55E', n: 17 },
                                         { id: 'unit2intermediate', label: 'Intermediate', meta: 'Ли questions + question words', color: '#F59E0B', n: 23 },
                                         { id: 'unit2advanced', label: 'Advanced', meta: 'Dialogues, ли placement & errors', color: '#EF4444', n: 15 },
+                                    ].map(({ id, label, meta, color, n }) => (
+                                        <div key={id} onClick={() => setActiveQuiz(id)} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.6rem 0.75rem', borderRadius: '10px', border: `1px solid ${color}44`, background: `${color}11`, cursor: 'pointer', transition: 'background 0.2s' }}
+                                            onMouseOver={e => e.currentTarget.style.background = `${color}22`}
+                                            onMouseOut={e => e.currentTarget.style.background = `${color}11`}>
+                                            <div>
+                                                <span style={{ fontWeight: 700, color, fontSize: '0.88rem' }}>{label}</span>
+                                                <span style={{ color: 'var(--text-secondary)', fontSize: '0.82rem', marginLeft: '8px' }}>{meta}</span>
+                                            </div>
+                                            <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', whiteSpace: 'nowrap' }}>{n} Qs</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </motion.div>
+
+                    <motion.h3 className="section-title" style={{ marginTop: '1.5rem', textAlign: 'center' }} variants={itemVariants}>Unit 3 Topics</motion.h3>
+
+                    <motion.div className="card" variants={itemVariants} style={{ cursor: 'default' }}>
+                        <div className="unit-row">
+                            <div className="unit-icon">
+                                <ShoppingCart size={20} />
+                            </div>
+                            <div className="unit-info">
+                                <div className="unit-title">Everyday Survival</div>
+                                <div className="unit-meta" style={{ marginBottom: '0.75rem' }}>В ресторанта, В магазина, Билети</div>
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                                    {[
+                                        { id: 'unit3restaurant', label: 'Restaurant', meta: 'Ordering food, polite requests', color: '#A78BFA', n: 20 },
+                                        { id: 'unit3shopping', label: 'Shopping', meta: 'Prices, paying, browsing', color: '#34D399', n: 18 },
+                                        { id: 'unit3tickets', label: 'Tickets', meta: 'Trains, cinema, scheduling', color: '#F472B6', n: 15 },
                                     ].map(({ id, label, meta, color, n }) => (
                                         <div key={id} onClick={() => setActiveQuiz(id)} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.6rem 0.75rem', borderRadius: '10px', border: `1px solid ${color}44`, background: `${color}11`, cursor: 'pointer', transition: 'background 0.2s' }}
                                             onMouseOver={e => e.currentTarget.style.background = `${color}22`}

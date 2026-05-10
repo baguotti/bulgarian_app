@@ -4,7 +4,7 @@ import {
     Coffee, Sun, Moon, MessageSquare, Handshake,
     User, ThumbsUp, Smile, HelpCircle, MapPin,
     Compass, Stethoscope, GraduationCap, HardHat, Car, Briefcase, Search, ChevronLeft,
-    CheckCircle2, XCircle, Target, BookOpen, Layers, MapPinOff
+    CheckCircle2, XCircle, Target, BookOpen, Layers, MapPinOff, ShoppingCart, Ticket
 } from 'lucide-react';
 import { containerVariants, itemVariants } from '../../data/animations';
 
@@ -116,9 +116,12 @@ const UnitDetail = ({ unitId, onBack }) => {
                 <h2 style={{ margin: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
                     {unitId === 1 && 'Unit 1: Приятно ми е!'}
                     {unitId === 2 && <><Target size={28} color="var(--accent-color)" /> Module: The 'Li' Spotlight & Plurals</>}
+                    {unitId === 3 && <><ShoppingCart size={28} color="var(--accent-color)" /> Unit 3: В града</>}
                 </h2>
                 <div style={{ color: 'var(--text-secondary)', marginTop: '4px' }}>
-                    {unitId === 1 ? 'Nice to meet you!' : 'Zero fluff. Pure mechanics.'}
+                    {unitId === 1 && 'Nice to meet you!'}
+                    {unitId === 2 && 'Zero fluff. Pure mechanics.'}
+                    {unitId === 3 && 'Everyday Survival: Food, Shopping & Tickets'}
                 </div>
             </motion.div>
 
@@ -436,6 +439,152 @@ const UnitDetail = ({ unitId, onBack }) => {
                             ))}
                         </div>
                     </motion.div>
+                </>
+            )}
+            {unitId === 3 && (
+                <>
+                    <motion.h3 className="section-title" style={{ marginTop: '1.5rem', display: 'flex', alignItems: 'center', gap: '8px' }} variants={itemVariants}>
+                        <Coffee size={20} color="var(--accent-color)" /> 1. Eating Out (В ресторанта)
+                    </motion.h3>
+                    <motion.div className="card" variants={itemVariants} style={{ padding: '0', overflow: 'hidden' }}>
+                        <table className="grammar-table" style={{ margin: 0 }}>
+                            <thead>
+                                <tr style={{ background: '#12151A' }}>
+                                    <th style={{ padding: '1rem' }}>Bulgarian</th>
+                                    <th>English</th>
+                                </tr>
+                            </thead>
+                            <tbody style={{ fontSize: '0.92rem' }}>
+                                {[
+                                    ['Менюто, моля.', 'The menu, please.'],
+                                    ['Сметката, моля.', 'The bill, please.'],
+                                    ['Имате ли вегетарианска храна?', 'Do you have vegetarian food?'],
+                                    ['Бих искал / Бих искала...', 'I would like... (m/f)'],
+                                    ['Запазена маса', 'Reserved table']
+                                ].map(([bg, en], i) => (
+                                    <tr key={i} style={{ background: i % 2 === 1 ? 'rgba(255,255,255,0.02)' : 'transparent' }}>
+                                        <td style={{ padding: '0.75rem 1rem', fontWeight: 600 }}>{bg}</td>
+                                        <td style={{ color: 'var(--text-secondary)' }}>{en}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </motion.div>
+
+                    <motion.h3 className="section-title" style={{ marginTop: '1.5rem', display: 'flex', alignItems: 'center', gap: '8px' }} variants={itemVariants}>
+                        <ShoppingCart size={20} color="var(--accent-color)" /> 2. Shopping (В магазина)
+                    </motion.h3>
+                    <motion.div className="card" variants={itemVariants} style={{ padding: '0', overflow: 'hidden' }}>
+                        <table className="grammar-table" style={{ margin: 0 }}>
+                            <thead>
+                                <tr style={{ background: '#12151A' }}>
+                                    <th style={{ padding: '1rem' }}>Bulgarian</th>
+                                    <th>English</th>
+                                </tr>
+                            </thead>
+                            <tbody style={{ fontSize: '0.92rem' }}>
+                                {[
+                                    ['Колко струва?', 'How much does it cost?'],
+                                    ['Мога ли да платя с карта?', 'Can I pay with card?'],
+                                    ['Плащам в брой.', 'I am paying in cash.'],
+                                    ['Торбичка, моля.', 'A bag, please.'],
+                                    ['Само разглеждам.', 'I am just looking.']
+                                ].map(([bg, en], i) => (
+                                    <tr key={i} style={{ background: i % 2 === 1 ? 'rgba(255,255,255,0.02)' : 'transparent' }}>
+                                        <td style={{ padding: '0.75rem 1rem', fontWeight: 600 }}>{bg}</td>
+                                        <td style={{ color: 'var(--text-secondary)' }}>{en}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </motion.div>
+
+                    <motion.h3 className="section-title" style={{ marginTop: '1.5rem', display: 'flex', alignItems: 'center', gap: '8px' }} variants={itemVariants}>
+                        <Ticket size={20} color="var(--accent-color)" /> 3. Buying Tickets (Билети)
+                    </motion.h3>
+                    <motion.div className="card" variants={itemVariants} style={{ padding: '0', overflow: 'hidden' }}>
+                        <table className="grammar-table" style={{ margin: 0 }}>
+                            <thead>
+                                <tr style={{ background: '#12151A' }}>
+                                    <th style={{ padding: '1rem' }}>Bulgarian</th>
+                                    <th>English</th>
+                                </tr>
+                            </thead>
+                            <tbody style={{ fontSize: '0.92rem' }}>
+                                {[
+                                    ['Един билет за влака, моля.', 'One train ticket, please.'],
+                                    ['Два билета за киното.', 'Two cinema tickets.'],
+                                    ['За кога?', 'For when?'],
+                                    ['За днес / За утре', 'For today / For tomorrow'],
+                                    ['Къде е гарата?', 'Where is the train station?']
+                                ].map(([bg, en], i) => (
+                                    <tr key={i} style={{ background: i % 2 === 1 ? 'rgba(255,255,255,0.02)' : 'transparent' }}>
+                                        <td style={{ padding: '0.75rem 1rem', fontWeight: 600 }}>{bg}</td>
+                                        <td style={{ color: 'var(--text-secondary)' }}>{en}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </motion.div>
+
+                    <motion.h3 className="section-title" style={{ marginTop: '1.5rem', display: 'flex', alignItems: 'center', gap: '8px' }} variants={itemVariants}>
+                        <BookOpen size={20} color="var(--accent-color)" /> 4. Grammar: Polite Requests
+                    </motion.h3>
+                    <motion.div className="card" variants={itemVariants} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                        <div style={{ background: 'rgba(34, 197, 94, 0.05)', padding: '1rem', borderRadius: '12px', borderLeft: '4px solid #22C55E' }}>
+                            <div style={{ fontWeight: 800, color: '#22C55E', marginBottom: '6px' }}>Искам (I want) vs Бих искал/а (I would like)</div>
+                            <div><strong>Искам</strong> вода. <span style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>— I want water. (Direct)</span></div>
+                            <div><strong>Бих искал</strong> вода. <span style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>— I would like water. (Polite, Male speaker)</span></div>
+                            <div><strong>Бих искала</strong> вода. <span style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>— I would like water. (Polite, Female speaker)</span></div>
+                            <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginTop: '8px' }}>💡 When ordering food or buying tickets, using <strong>Бих искал/а</strong> is much more polite!</div>
+                        </div>
+                    </motion.div>
+
+                    <motion.h3 className="section-title" style={{ marginTop: '1.5rem', display: 'flex', alignItems: 'center', gap: '8px' }} variants={itemVariants}>
+                        <MessageSquare size={20} color="var(--accent-color)" /> 5. Dialogues in Practice
+                    </motion.h3>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                        <motion.div className="card" variants={itemVariants}>
+                            <div style={{ fontWeight: 700, color: 'var(--accent-color)', marginBottom: '0.75rem' }}>At the Restaurant</div>
+                            <div style={{ lineHeight: 2, fontSize: '0.97rem' }}>
+                                {[
+                                    ['Сервитьор', 'Добър ден! Заповядайте менюто.', 'Good afternoon! Here is the menu.'],
+                                    ['Клиент', 'Благодаря. Бих искал една салата и вода.', 'Thank you. I would like a salad and water.'],
+                                    ['Сервитьор', 'Нещо друго?', 'Anything else?'],
+                                    ['Клиент', 'Не, благодаря. Сметката, моля.', 'No, thank you. The bill, please.'],
+                                ].map(([speaker, bg, en], i) => (
+                                    <div key={i} style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start', marginBottom: '0.25rem' }}>
+                                        <span style={{ minWidth: '80px', fontWeight: 700, color: i % 2 === 0 ? '#A78BFA' : '#34D399', fontSize: '0.85rem', paddingTop: '2px' }}>{speaker}:</span>
+                                        <div>
+                                            <span style={{ fontWeight: 600 }}>{bg}</span>
+                                            <span style={{ color: 'var(--text-secondary)', fontSize: '0.88rem' }}> — {en}</span>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </motion.div>
+                        <motion.div className="card" variants={itemVariants}>
+                            <div style={{ fontWeight: 700, color: 'var(--accent-color)', marginBottom: '0.75rem' }}>At the Train Station</div>
+                            <div style={{ lineHeight: 2, fontSize: '0.97rem' }}>
+                                {[
+                                    ['Клиент', 'Здравейте. Два билета за Пловдив, моля.', 'Hello. Two tickets to Plovdiv, please.'],
+                                    ['Касиер', 'За днес ли?', 'For today?'],
+                                    ['Клиент', 'Да, за днес. Колко струва?', 'Yes, for today. How much does it cost?'],
+                                    ['Касиер', 'Трийсет лева.', 'Thirty leva.'],
+                                    ['Клиент', 'Мога ли да платя с карта?', 'Can I pay with card?'],
+                                    ['Касиер', 'Да, може.', 'Yes, you can.'],
+                                ].map(([speaker, bg, en], i) => (
+                                    <div key={i} style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start', marginBottom: '0.25rem' }}>
+                                        <span style={{ minWidth: '80px', fontWeight: 700, color: i % 2 === 0 ? '#34D399' : '#F472B6', fontSize: '0.85rem', paddingTop: '2px' }}>{speaker}:</span>
+                                        <div>
+                                            <span style={{ fontWeight: 600 }}>{bg}</span>
+                                            <span style={{ color: 'var(--text-secondary)', fontSize: '0.88rem' }}> — {en}</span>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </motion.div>
+                    </div>
                 </>
             )}
         </motion.section>

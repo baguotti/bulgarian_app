@@ -250,3 +250,94 @@ export const quizUnit2Advanced = [
 // Combined alias (backwards compat)
 export const quizUnit2Grammar = [...quizUnit2Beginner, ...quizUnit2Intermediate, ...quizUnit2Advanced];
 
+// =====================================
+// UNIT 3: EVERYDAY SURVIVAL
+// =====================================
+
+// --- RESTAURANT (В ресторанта) ---
+export const quizUnit3Restaurant = [
+    // Translate to Bulgarian
+    { q: "Translate: 'The menu, please.'", o: ["Менюто, моля.", "Сметката, моля.", "Масата, моля.", "Водата, моля."], c: 0 },
+    { q: "Translate: 'The bill, please.'", o: ["Сметката, моля.", "Менюто, моля.", "Масата, моля.", "Храната, моля."], c: 0 },
+    { q: "Translate: 'I would like water.' (male speaker)", o: ["Бих искал вода.", "Бих искала вода.", "Искам вода.", "Имам вода."], c: 0 },
+    { q: "Translate: 'I would like water.' (female speaker)", o: ["Бих искала вода.", "Бих искал вода.", "Искам вода.", "Имам вода."], c: 0 },
+    { q: "Translate: 'Do you have vegetarian food?'", o: ["Имате ли вегетарианска храна?", "Искам вегетарианска храна.", "Къде е вегетарианската храна?", "Вегетарианска храна, моля."], c: 0 },
+    { q: "Translate: 'Anything else?'", o: ["Нещо друго?", "Какво искате?", "Колко струва?", "Готово ли е?"], c: 0 },
+    { q: "Translate: 'Reserved table'", o: ["Запазена маса", "Свободна маса", "Голяма маса", "Малка маса"], c: 0 },
+
+    // Fill in the blank
+    { q: "___, моля. (The menu)", o: ["Менюто", "Сметката", "Масата", "Водата"], c: 0 },
+    { q: "Бих ___ една салата. (I would like — male)", o: ["искал", "искала", "искам", "искате"], c: 0 },
+    { q: "Бих ___ една салата. (I would like — female)", o: ["искала", "искал", "искам", "искате"], c: 0 },
+    { q: "Имате ___ вегетарианска храна?", o: ["ли", "не", "да", "как"], c: 0 },
+
+    // Polite vs direct
+    { q: "Which is MORE polite?", o: ["Бих искал вода.", "Искам вода.", "Дайте ми вода.", "Вода!"], c: 0 },
+    { q: "Which is DIRECT (less polite)?", o: ["Искам кафе.", "Бих искал кафе.", "Бих искала кафе.", "Кафе, моля."], c: 0 },
+
+    // Situation-based
+    { q: "You sit down at a restaurant. What do you ask first?", o: ["Менюто, моля.", "Сметката, моля.", "Колко струва?", "Благодаря."], c: 0 },
+    { q: "You finished eating. What do you say?", o: ["Сметката, моля.", "Менюто, моля.", "Нещо друго?", "Запазена маса."], c: 0 },
+    { q: "The waiter asks 'Нещо друго?' You are done. You say:", o: ["Не, благодаря.", "Да, менюто.", "Колко струва?", "Запазена маса."], c: 0 },
+
+    // Dialogue completion
+    { q: "Сервитьор: Добър ден! ___\nYou: Благодаря.", o: ["Заповядайте менюто.", "Сметката, моля.", "Колко струва?", "Нещо друго?"], c: 0 },
+    { q: "Сервитьор: Нещо друго?\nYou: Не, ___.", o: ["благодаря", "моля", "искам", "имам"], c: 0 },
+    { q: "You: Бих искал една салата и вода.\nСервитьор: ___?", o: ["Нещо друго", "Колко струва", "Как се казвате", "Откъде сте"], c: 0 },
+    { q: "Translate the waiter's line: 'Заповядайте менюто.'", o: ["Here is the menu.", "The bill, please.", "What would you like?", "Are you ready?"], c: 0 },
+];
+
+// --- SHOPPING (В магазина) ---
+export const quizUnit3Shopping = [
+    // Translate to Bulgarian
+    { q: "Translate: 'How much does it cost?'", o: ["Колко струва?", "Какво е това?", "Къде е магазинът?", "Имате ли това?"], c: 0 },
+    { q: "Translate: 'Can I pay with card?'", o: ["Мога ли да платя с карта?", "Колко струва?", "Имате ли карта?", "Картата, моля."], c: 0 },
+    { q: "Translate: 'I am paying in cash.'", o: ["Плащам в брой.", "Плащам с карта.", "Колко струва?", "Мога ли да платя?"], c: 0 },
+    { q: "Translate: 'A bag, please.'", o: ["Торбичка, моля.", "Чанта, моля.", "Кутия, моля.", "Книга, моля."], c: 0 },
+    { q: "Translate: 'I am just looking.'", o: ["Само разглеждам.", "Само питам.", "Само искам.", "Само чакам."], c: 0 },
+
+    // Translate to English
+    { q: "Колко струва?", o: ["How much does it cost?", "What is this?", "Where is the shop?", "Do you have this?"], c: 0 },
+    { q: "Мога ли да платя с карта?", o: ["Can I pay with card?", "Do you have a card?", "Where is the card?", "The card, please."], c: 0 },
+    { q: "Торбичка, моля.", o: ["A bag, please.", "A book, please.", "A box, please.", "A cup, please."], c: 0 },
+    { q: "Само разглеждам.", o: ["I am just looking.", "I am just asking.", "I am just waiting.", "I am just eating."], c: 0 },
+
+    // Fill in the blank
+    { q: "Колко ___? (How much does it cost?)", o: ["струва", "имате", "искам", "плащам"], c: 0 },
+    { q: "Мога ли да ___ с карта? (Can I pay?)", o: ["платя", "купя", "видя", "взема"], c: 0 },
+    { q: "Плащам в ___. (I am paying in cash.)", o: ["брой", "карта", "банка", "магазин"], c: 0 },
+    { q: "___, моля. (A bag, please.)", o: ["Торбичка", "Менюто", "Билет", "Сметката"], c: 0 },
+
+    // Situation-based
+    { q: "A shop assistant approaches you. You're just browsing. You say:", o: ["Само разглеждам.", "Колко струва?", "Менюто, моля.", "Благодаря, чао."], c: 0 },
+    { q: "You want to know the price. You ask:", o: ["Колко струва?", "Какво е това?", "Само разглеждам.", "Имате ли торбичка?"], c: 0 },
+    { q: "You want to pay by card. You ask:", o: ["Мога ли да платя с карта?", "Плащам в брой.", "Колко струва?", "Торбичка, моля."], c: 0 },
+    { q: "At the checkout, you need a bag. You say:", o: ["Торбичка, моля.", "Колко струва?", "Само разглеждам.", "Мога ли да платя с карта?"], c: 0 },
+    { q: "You prefer to pay cash. You say:", o: ["Плащам в брой.", "Мога ли да платя с карта?", "Колко струва?", "Торбичка, моля."], c: 0 },
+];
+
+// --- TICKETS (Билети) ---
+export const quizUnit3Tickets = [
+    // Translate to Bulgarian
+    { q: "Translate: 'One train ticket, please.'", o: ["Един билет за влака, моля.", "Два билета за влака.", "Един билет за киното, моля.", "Влакът, моля."], c: 0 },
+    { q: "Translate: 'Two cinema tickets.'", o: ["Два билета за киното.", "Един билет за киното.", "Два билета за влака.", "Два филма, моля."], c: 0 },
+    { q: "Translate: 'For today.'", o: ["За днес.", "За утре.", "За кога?", "За колко?"], c: 0 },
+    { q: "Translate: 'For tomorrow.'", o: ["За утре.", "За днес.", "За кога?", "За колко?"], c: 0 },
+    { q: "Translate: 'Where is the train station?'", o: ["Къде е гарата?", "Кога е влакът?", "Колко е билетът?", "Къде е киното?"], c: 0 },
+    { q: "Translate: 'For when?'", o: ["За кога?", "За къде?", "За колко?", "За кой?"], c: 0 },
+
+    // Translate to English
+    { q: "Един билет за влака, моля.", o: ["One train ticket, please.", "Two train tickets.", "One cinema ticket.", "The train, please."], c: 0 },
+    { q: "Два билета за киното.", o: ["Two cinema tickets.", "One cinema ticket.", "Two train tickets.", "Two bus tickets."], c: 0 },
+    { q: "Къде е гарата?", o: ["Where is the train station?", "When is the train?", "How much is the ticket?", "Where is the cinema?"], c: 0 },
+
+    // Fill in the blank
+    { q: "Един ___ за влака, моля.", o: ["билет", "билета", "билети", "влак"], c: 0 },
+    { q: "Два ___ за киното.", o: ["билета", "билет", "билети", "кино"], c: 0 },
+    { q: "Къде е ___? (the train station)", o: ["гарата", "киното", "парка", "магазинът"], c: 0 },
+
+    // Dialogue completion
+    { q: "You: Два билета за Пловдив, моля.\nКасиер: За днес ___?", o: ["ли", "не", "да", "как"], c: 0 },
+    { q: "Касиер: Трийсет лева.\nYou: ___ ли да платя с карта?", o: ["Мога", "Искам", "Имам", "Знам"], c: 0 },
+    { q: "You want tickets for tomorrow. You say:", o: ["За утре, моля.", "За днес, моля.", "За кога?", "Колко струва?"], c: 0 },
+];

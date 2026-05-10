@@ -131,5 +131,17 @@ export const vocabulary = [
     { bg: "богат", lat: "bo<strong>gat</strong>", en: "rich", cat: "Adjectives" }, { bg: "беден", lat: "<strong>be</strong>den", en: "poor", cat: "Adjectives" },
     { bg: "здрав", lat: "<strong>zdrav</strong>", en: "healthy", cat: "Adjectives" }, { bg: "болен", lat: "<strong>bo</strong>len", en: "sick", cat: "Adjectives" },
     { bg: "чист", lat: "<strong>chist</strong>", en: "clean", cat: "Adjectives" }, { bg: "мръсен", lat: "<strong>mra</strong>sen", en: "dirty", cat: "Adjectives" },
-    { bg: "висок", lat: "vi<strong>sok</strong>", en: "tall", cat: "Adjectives" }, { bg: "нисък", lat: "<strong>ni</strong>sak", en: "short", cat: "Adjectives" }
+    { bg: "висок", lat: "vi<strong>sok</strong>", en: "tall", cat: "Adjectives" }, { bg: "нисък", lat: "<strong>ni</strong>sak", en: "short", cat: "Adjectives" },
+
+    // Phrases & Everyday Survival
+    { bg: "Менюто, моля", lat: "Me<strong>nyu</strong>to, <strong>mo</strong>lya", en: "The menu, please", cat: "Phrases" },
+    { bg: "Сметката, моля", lat: "<strong>Smet</strong>kata, <strong>mo</strong>lya", en: "The bill, please", cat: "Phrases" },
+    { bg: "Колко струва?", lat: "Kol<strong>ko</strong> <strong>stru</strong>va", en: "How much does it cost?", cat: "Phrases" },
+    { bg: "Мога ли да платя с карта?", lat: "<strong>Mo</strong>ga li da pla<strong>tya</strong> s <strong>kar</strong>ta", en: "Can I pay with card?", cat: "Phrases" },
+    { bg: "Само разглеждам", lat: "<strong>Sa</strong>mo raz<strong>glezh</strong>dam", en: "I am just looking", cat: "Phrases" },
+    { bg: "Един билет, моля", lat: "E<strong>din</strong> bi<strong>let</strong>, <strong>mo</strong>lya", en: "One ticket, please", cat: "Phrases" },
+    { bg: "Два билета", lat: "<strong>Dva</strong> bi<strong>le</strong>ta", en: "Two tickets", cat: "Phrases" },
+    { bg: "Имате ли вегетарианска храна?", lat: "<strong>I</strong>mate li vegetari<strong>an</strong>ska hra<strong>na</strong>", en: "Do you have vegetarian food?", cat: "Phrases" },
+    { bg: "Бих искал", lat: "<strong>Bih</strong> <strong>is</strong>kal", en: "I would like (m)", cat: "Phrases" },
+    { bg: "Бих искала", lat: "<strong>Bih</strong> <strong>is</strong>kala", en: "I would like (f)", cat: "Phrases" }
 ];

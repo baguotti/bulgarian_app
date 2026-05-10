@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { quizToBe, quizNationalities, quizProfessions, quizUnit2Beginner, quizUnit2Intermediate, quizUnit2Advanced } from '../../data/quizzes';
+import { quizToBe, quizNationalities, quizProfessions, quizUnit2Beginner, quizUnit2Intermediate, quizUnit2Advanced, quizUnit3Restaurant, quizUnit3Shopping, quizUnit3Tickets } from '../../data/quizzes';
 import { Trophy, Star, ThumbsUp, Dumbbell, ArrowLeft } from 'lucide-react';
 import { triggerHaptic } from '../../utils/haptics';
 
@@ -134,6 +134,9 @@ const QuizGame = ({ topicId, onBack }) => {
         else if (topicId === 'unit2beginner') data = quizUnit2Beginner;
         else if (topicId === 'unit2intermediate') data = quizUnit2Intermediate;
         else if (topicId === 'unit2advanced') data = quizUnit2Advanced;
+        else if (topicId === 'unit3restaurant') data = quizUnit3Restaurant;
+        else if (topicId === 'unit3shopping') data = quizUnit3Shopping;
+        else if (topicId === 'unit3tickets') data = quizUnit3Tickets;
 
         // Deep-copy and shuffle questions, then randomize option order per question
         const processedQuestions = shuffleArray(data).map(question => {

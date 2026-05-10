@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Hand, Briefcase, Calendar } from 'lucide-react';
+import { Hand, Briefcase, Calendar, ShoppingCart } from 'lucide-react';
 import { containerVariants, itemVariants } from '../../data/animations';
 import learningBg from '../../assets/learning-bg-v3.webp';
 
@@ -64,13 +64,27 @@ const UnitList = ({ onSelectUnit }) => {
             </motion.div>
 
             {/* Unit 3 */}
+            <motion.div className="card" onClick={() => onSelectUnit(3)} variants={itemVariants}>
+                <div className="unit-row">
+                    <div className="unit-icon">
+                        <ShoppingCart size={20} />
+                    </div>
+                    <div className="unit-info">
+                        <div className="unit-title">Unit 3: В града</div>
+                        <div className="unit-meta">Everyday Survival, Shopping & Tickets</div>
+                    </div>
+                </div>
+                <button className="action-btn">Open Unit 3</button>
+            </motion.div>
+
+            {/* Unit 4 */}
             <motion.div className="card" style={{ opacity: 0.7, cursor: 'default' }} variants={itemVariants}>
                 <div className="unit-row">
                     <div className="unit-icon">
                         <Calendar size={20} />
                     </div>
                     <div className="unit-info">
-                        <div className="unit-title">Unit 3: Coming Soon</div>
+                        <div className="unit-title">Unit 4: Coming Soon</div>
                         <div className="unit-meta">Days, Numbers & Time</div>
                     </div>
                 </div>
