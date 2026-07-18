@@ -48,7 +48,7 @@ const Header = ({ currentTab }) => {
         <header>
             <div className="header-content">
                 <div className="header-text">
-                    <div className="app-title">Learning<br />Bulgarian</div>
+                    <div className="app-title" dangerouslySetInnerHTML={{ __html: currentTab === 'stats' ? 'Your<br />Progress' : 'Learning<br />Bulgarian' }} />
                 </div>
                 <div className="header-img-container" onClick={handleSealClick} style={{ cursor: 'pointer' }}>
                     <Lottie

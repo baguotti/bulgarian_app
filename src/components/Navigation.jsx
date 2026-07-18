@@ -5,7 +5,8 @@ const Navigation = ({ activeTab, onTabChange }) => {
     const tabs = [
         { id: 'learn', label: 'Learn' },
         { id: 'practice', label: 'Practice' },
-        { id: 'flashcards', label: 'Vocabulary' }
+        { id: 'flashcards', label: 'Vocabulary' },
+        { id: 'stats', label: 'Stats' }
     ];
 
     return (

@@ -6,11 +6,17 @@ import UnitList from './components/Learn/UnitList';
 import UnitDetail from './components/Learn/UnitDetail';
 import PracticeSection from './components/Practice/PracticeSection';
 import FlashcardGame from './components/Flashcards/FlashcardGame';
+import StatsSection from './components/Stats/StatsSection';
+import GoalReminder from './components/Stats/GoalReminder';
+import { useAppUsageTracker } from './hooks/useAppUsageTracker';
 
 function App() {
   const [activeTab, setActiveTab] = useState(() => sessionStorage.getItem('activeTab') || 'learn');
   const [selectedUnit, setSelectedUnit] = useState(() => sessionStorage.getItem('selectedUnit') || null);
   const [practiceReset, setPracticeReset] = useState(0);
+  
+  // Track app usage
+  const usageStats = useAppUsageTracker();
 
   // Sync state with history on mount and on popstate (back button)
   useEffect(() => {
@@ -63,6 +69,8 @@ function App() {
       <Navigation activeTab={activeTab} onTabChange={handleTabChange} />
 
       <main style={{ position: 'relative' }}>
+        <GoalReminder usage={usageStats} />
+        
         <AnimatePresence mode="wait">
           <motion.div
             key={activeTab + (selectedUnit || '') + (activeTab === 'practice' ? practiceReset : '')}
@@ -86,6 +94,8 @@ function App() {
             {activeTab === 'practice' && <PracticeSection resetCounter={practiceReset} />}
 
             {activeTab === 'flashcards' && <FlashcardGame />}
+            
+            {activeTab === 'stats' && <StatsSection usage={usageStats} />}
           </motion.div>
         </AnimatePresence>
       </main>
