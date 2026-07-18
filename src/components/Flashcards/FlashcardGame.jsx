@@ -14,7 +14,8 @@ const FlashcardGame = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isFlipped, setIsFlipped] = useState(false);
     const [category, setCategory] = useState("Common Words");
-    const [isRandom, setIsRandom] = useState(false);
+    // mode: 'category' | 'shuffle-category' | 'shuffle-all'
+    const [mode, setMode] = useState('category');
 
     // Categories and their icons
     const categoryIcons = {
@@ -34,46 +35,52 @@ const FlashcardGame = () => {
     // Initial Load
     useEffect(() => {
         if (vocabulary && vocabulary.length > 0) {
-            updateDeck(isRandom ? "All" : category, isRandom);
+            updateDeck(category, false);
         } else {
             console.error("Vocabulary data is missing or empty!");
         }
     }, []);
 
-    const updateDeck = (cat, random) => {
-        let deck = [...vocabulary];
-        if (cat !== "All") {
-            deck = deck.filter(c => c.cat === cat);
+    const shuffle = (deck) => {
+        const d = [...deck];
+        for (let i = d.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [d[i], d[j]] = [d[j], d[i]];
         }
+        return d;
+    };
 
-        if (random) {
-            // Shuffle
-            for (let i = deck.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [deck[i], deck[j]] = [deck[j], deck[i]];
-            }
-        }
-
+    const updateDeck = (cat, shouldShuffle) => {
+        let deck = cat === 'All'
+            ? [...vocabulary]
+            : vocabulary.filter(c => c.cat === cat);
+        if (shouldShuffle) deck = shuffle(deck);
         setActiveDeck(deck);
         setCurrentIndex(0);
         setIsFlipped(false);
     };
 
     const handleCategoryChange = (newCat) => {
-        setIsRandom(false);
+        setMode('category');
         setCategory(newCat);
         updateDeck(newCat, false);
     };
 
-    const toggleRandom = () => {
-        setIsRandom(true);
-        updateDeck("All", true);
+    const handleShuffleCategory = () => {
+        setMode('shuffle-category');
+        updateDeck(category, true);
+    };
+
+    const handleShuffleAll = () => {
+        setMode('shuffle-all');
+        updateDeck('All', true);
     };
 
     const nextCard = () => {
         triggerHaptic('medium');
         setIsFlipped(false);
-        if (isRandom) {
+        // In any shuffle mode, pick a new random card; in ordered mode, go sequential
+        if (mode === 'shuffle-category' || mode === 'shuffle-all') {
             setCurrentIndex(Math.floor(Math.random() * activeDeck.length));
         } else {
             setCurrentIndex(prev => (prev + 1) % activeDeck.length);
@@ -121,7 +128,7 @@ const FlashcardGame = () => {
 
     const card = activeDeck[currentIndex];
     const categories = Object.keys(categoryIcons);
-    const SelectedIcon = isRandom ? Folder : (categoryIcons[category] || Folder);
+    const SelectedIcon = mode === 'shuffle-all' ? Folder : (categoryIcons[category] || Folder);
 
     return (
         <motion.section
@@ -141,46 +148,26 @@ const FlashcardGame = () => {
                 }}
                 variants={itemVariants}
             >
-                {/* Random Button */}
-                <button
-                    className={`nav-tab ${isRandom ? 'active' : ''}`}
-                    style={{
-                        padding: '0.6rem 1rem',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '0.5rem',
-                        height: '42px'
-                    }}
-                    onClick={toggleRandom}
-                >
-                    <Shuffle size={16} />
-                    Random
-                </button>
-
-                {/* Integrated Category Dropdown */}
+                {/* Category Dropdown */}
                 <div style={{ position: 'relative' }}>
                     <select
-                        value={isRandom ? "" : category}
+                        value={category}
                         onChange={(e) => handleCategoryChange(e.target.value)}
-                        className={`nav-tab ${!isRandom ? 'active' : ''}`}
+                        className={`nav-tab ${mode === 'category' ? 'active' : ''}`}
                         style={{
                             padding: '0.6rem 2.2rem 0.6rem 2.4rem',
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '0.5rem',
                             appearance: 'none',
                             cursor: 'pointer',
                             height: '42px',
                             border: '1px solid var(--border-color)',
-                            backgroundColor: !isRandom ? 'var(--accent-bg)' : 'transparent',
-                            color: !isRandom ? 'var(--accent-color)' : 'var(--text-secondary)',
+                            backgroundColor: mode === 'category' ? 'var(--accent-bg)' : 'transparent',
+                            color: mode === 'category' ? 'var(--accent-color)' : 'var(--text-secondary)',
                             zIndex: 2,
                             position: 'relative',
                             minWidth: '165px',
                             transition: 'all 0.3s ease'
                         }}
                     >
-                        {isRandom && <option value="" disabled>By Category</option>}
                         {categories.map(c => <option key={c} value={c}>{c}</option>)}
                     </select>
                     <ChevronDown
@@ -191,7 +178,7 @@ const FlashcardGame = () => {
                             top: '50%',
                             transform: 'translateY(-50%)',
                             pointerEvents: 'none',
-                            color: !isRandom ? 'var(--accent-color)' : 'var(--text-secondary)',
+                            color: mode === 'category' ? 'var(--accent-color)' : 'var(--text-secondary)',
                             zIndex: 3
                         }}
                     />
@@ -204,11 +191,45 @@ const FlashcardGame = () => {
                             transform: 'translateY(-50%)',
                             zIndex: 3,
                             pointerEvents: 'none',
-                            color: !isRandom ? 'var(--accent-color)' : 'var(--text-secondary)',
-                            opacity: !isRandom ? 0.9 : 0.6
+                            color: mode === 'category' ? 'var(--accent-color)' : 'var(--text-secondary)',
+                            opacity: mode === 'category' ? 0.9 : 0.6
                         }}
                     />
                 </div>
+
+                {/* Shuffle Category Button */}
+                <button
+                    className={`nav-tab ${mode === 'shuffle-category' ? 'active' : ''}`}
+                    style={{
+                        padding: '0.6rem 1rem',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.5rem',
+                        height: '42px'
+                    }}
+                    onClick={handleShuffleCategory}
+                    title={`Shuffle within ${category}`}
+                >
+                    <Shuffle size={16} />
+                    Shuffle
+                </button>
+
+                {/* Shuffle All Button */}
+                <button
+                    className={`nav-tab ${mode === 'shuffle-all' ? 'active' : ''}`}
+                    style={{
+                        padding: '0.6rem 1rem',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.5rem',
+                        height: '42px'
+                    }}
+                    onClick={handleShuffleAll}
+                    title="Shuffle all words"
+                >
+                    <Shuffle size={16} />
+                    Shuffle All
+                </button>
             </motion.div>
 
             {/* Card Counter */}
@@ -219,7 +240,7 @@ const FlashcardGame = () => {
                 fontSize: '0.8rem',
                 opacity: 0.7
             }} variants={itemVariants}>
-                {isRandom ? 'Random Deck' : category} • <span style={{ color: 'var(--accent-color)', fontWeight: 600 }}>{currentIndex + 1}</span> / {activeDeck.length}
+                {mode === 'shuffle-all' ? 'All Words (Shuffled)' : mode === 'shuffle-category' ? `${category} (Shuffled)` : category} • <span style={{ color: 'var(--accent-color)', fontWeight: 600 }}>{currentIndex + 1}</span> / {activeDeck.length}
             </motion.div>
 
             {/* The Flashcard */}
