@@ -1,3 +1,9 @@
+# Bulgarian Classes App
+
+This application is deployed at: **[learnbulgarianapp.netlify.app](https://learnbulgarianapp.netlify.app/)**
+
+---
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
