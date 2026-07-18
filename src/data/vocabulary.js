@@ -143,5 +143,60 @@ export const vocabulary = [
     { bg: "Два билета", lat: "<strong>Dva</strong> bi<strong>le</strong>ta", en: "Two tickets", cat: "Phrases" },
     { bg: "Имате ли вегетарианска храна?", lat: "<strong>I</strong>mate li vegetari<strong>an</strong>ska hra<strong>na</strong>", en: "Do you have vegetarian food?", cat: "Phrases" },
     { bg: "Бих искал", lat: "<strong>Bih</strong> <strong>is</strong>kal", en: "I would like (m)", cat: "Phrases" },
-    { bg: "Бих искала", lat: "<strong>Bih</strong> <strong>is</strong>kala", en: "I would like (f)", cat: "Phrases" }
+    { bg: "Бих искала", lat: "<strong>Bih</strong> <strong>is</strong>kala", en: "I would like (f)", cat: "Phrases" },
+
+    // Common Words
+    // Pronouns
+    { bg: "аз", lat: "<strong>az</strong>", en: "I", cat: "Common Words" }, { bg: "ти", lat: "<strong>ti</strong>", en: "you (sg)", cat: "Common Words" }, { bg: "той", lat: "<strong>toy</strong>", en: "he", cat: "Common Words" },
+    { bg: "тя", lat: "<strong>tya</strong>", en: "she", cat: "Common Words" }, { bg: "то", lat: "<strong>to</strong>", en: "it", cat: "Common Words" }, { bg: "ние", lat: "<strong>ni</strong>e", en: "we", cat: "Common Words" },
+    { bg: "вие", lat: "<strong>vi</strong>e", en: "you (pl/formal)", cat: "Common Words" }, { bg: "те", lat: "<strong>te</strong>", en: "they", cat: "Common Words" }, 
+    { bg: "ме", lat: "<strong>me</strong>", en: "me (obj)", cat: "Common Words" }, { bg: "го", lat: "<strong>go</strong>", en: "him/it (obj)", cat: "Common Words" }, { bg: "я", lat: "<strong>ya</strong>", en: "her (obj)", cat: "Common Words" },
+    { bg: "ни", lat: "<strong>ni</strong>", en: "us (obj)", cat: "Common Words" }, { bg: "ви", lat: "<strong>vi</strong>", en: "you (obj pl)", cat: "Common Words" }, { bg: "ги", lat: "<strong>gi</strong>", en: "them (obj)", cat: "Common Words" },
+    { bg: "ми", lat: "<strong>mi</strong>", en: "to me / my", cat: "Common Words" }, { bg: "му", lat: "<strong>mu</strong>", en: "to him / his", cat: "Common Words" }, { bg: "ѝ", lat: "<strong>i</strong>", en: "to her / her", cat: "Common Words" },
+    { bg: "им", lat: "<strong>im</strong>", en: "to them / their", cat: "Common Words" },
+    // Demonstratives
+    { bg: "този", lat: "<strong>to</strong>zi", en: "this (m)", cat: "Common Words" }, { bg: "тази", lat: "<strong>ta</strong>zi", en: "this (f)", cat: "Common Words" }, { bg: "това", lat: "to<strong>va</strong>", en: "this (n) / that", cat: "Common Words" },
+    { bg: "тези", lat: "<strong>te</strong>zi", en: "these", cat: "Common Words" }, { bg: "онзи", lat: "<strong>on</strong>zi", en: "that (m)", cat: "Common Words" }, { bg: "онази", lat: "o<strong>na</strong>zi", en: "that (f)", cat: "Common Words" },
+    { bg: "онова", lat: "ono<strong>va</strong>", en: "that (n)", cat: "Common Words" }, { bg: "онези", lat: "o<strong>ne</strong>zi", en: "those", cat: "Common Words" },
+    { bg: "такъв", lat: "ta<strong>kav</strong>", en: "such (m)", cat: "Common Words" }, { bg: "такава", lat: "ta<strong>ka</strong>va", en: "such (f)", cat: "Common Words" },
+    // Question words
+    { bg: "кой", lat: "<strong>koy</strong>", en: "who", cat: "Common Words" }, { bg: "какво", lat: "kak<strong>vo</strong>", en: "what", cat: "Common Words" }, { bg: "къде", lat: "ka<strong>de</strong>", en: "where", cat: "Common Words" },
+    { bg: "кога", lat: "ko<strong>ga</strong>", en: "when", cat: "Common Words" }, { bg: "защо", lat: "zash<strong>to</strong>", en: "why", cat: "Common Words" }, { bg: "как", lat: "<strong>kak</strong>", en: "how", cat: "Common Words" },
+    { bg: "колко", lat: "<strong>kol</strong>ko", en: "how much/many", cat: "Common Words" }, { bg: "чий", lat: "<strong>chiy</strong>", en: "whose", cat: "Common Words" },
+    // Time adverbs
+    { bg: "сега", lat: "se<strong>ga</strong>", en: "now", cat: "Common Words" }, { bg: "после", lat: "<strong>pos</strong>le", en: "later", cat: "Common Words" }, { bg: "преди", lat: "pre<strong>di</strong>", en: "before", cat: "Common Words" },
+    { bg: "днес", lat: "<strong>dnes</strong>", en: "today", cat: "Common Words" }, { bg: "утре", lat: "<strong>ut</strong>re", en: "tomorrow", cat: "Common Words" }, { bg: "вчера", lat: "<strong>vche</strong>ra", en: "yesterday", cat: "Common Words" },
+    { bg: "винаги", lat: "<strong>vi</strong>nagi", en: "always", cat: "Common Words" }, { bg: "никога", lat: "<strong>ni</strong>koga", en: "never", cat: "Common Words" }, { bg: "понякога", lat: "po<strong>nya</strong>koga", en: "sometimes", cat: "Common Words" },
+    { bg: "често", lat: "<strong>ches</strong>to", en: "often", cat: "Common Words" }, { bg: "рядко", lat: "<strong>ryad</strong>ko", en: "rarely", cat: "Common Words" }, { bg: "рано", lat: "<strong>ra</strong>no", en: "early", cat: "Common Words" },
+    { bg: "късно", lat: "<strong>kas</strong>no", en: "late", cat: "Common Words" }, { bg: "вече", lat: "<strong>ve</strong>che", en: "already", cat: "Common Words" }, { bg: "още", lat: "<strong>osh</strong>te", en: "still/yet", cat: "Common Words" },
+    { bg: "пак", lat: "<strong>pak</strong>", en: "again", cat: "Common Words" }, { bg: "веднага", lat: "ved<strong>na</strong>ga", en: "immediately", cat: "Common Words" }, { bg: "скоро", lat: "<strong>sko</strong>ro", en: "soon", cat: "Common Words" },
+    { bg: "отдавна", lat: "ot<strong>dav</strong>na", en: "long ago", cat: "Common Words" }, { bg: "някога", lat: "<strong>nya</strong>koga", en: "sometime", cat: "Common Words" },
+    // Place adverbs
+    { bg: "тук", lat: "<strong>tuk</strong>", en: "here", cat: "Common Words" }, { bg: "там", lat: "<strong>tam</strong>", en: "there", cat: "Common Words" }, { bg: "горе", lat: "<strong>go</strong>re", en: "up", cat: "Common Words" },
+    { bg: "долу", lat: "<strong>do</strong>lu", en: "down", cat: "Common Words" }, { bg: "вътре", lat: "<strong>vat</strong>re", en: "inside", cat: "Common Words" }, { bg: "вън", lat: "<strong>van</strong>", en: "outside", cat: "Common Words" },
+    { bg: "напред", lat: "na<strong>pred</strong>", en: "forward", cat: "Common Words" }, { bg: "назад", lat: "na<strong>zad</strong>", en: "backward", cat: "Common Words" }, { bg: "наблизо", lat: "na<strong>bli</strong>zo", en: "nearby", cat: "Common Words" },
+    { bg: "далеч", lat: "da<strong>lech</strong>", en: "far", cat: "Common Words" }, { bg: "отпред", lat: "ot<strong>pred</strong>", en: "in front", cat: "Common Words" }, { bg: "отзад", lat: "ot<strong>zad</strong>", en: "behind", cat: "Common Words" },
+    { bg: "наляво", lat: "na<strong>lya</strong>vo", en: "to the left", cat: "Common Words" }, { bg: "надясно", lat: "na<strong>dyas</strong>no", en: "to the right", cat: "Common Words" }, { bg: "навсякъде", lat: "nav<strong>sya</strong>kade", en: "everywhere", cat: "Common Words" },
+    // Conjunctions
+    { bg: "и", lat: "<strong>i</strong>", en: "and", cat: "Common Words" }, { bg: "или", lat: "i<strong>li</strong>", en: "or", cat: "Common Words" }, { bg: "но", lat: "<strong>no</strong>", en: "but", cat: "Common Words" },
+    { bg: "обаче", lat: "o<strong>ba</strong>che", en: "however", cat: "Common Words" }, { bg: "защото", lat: "za<strong>shto</strong>to", en: "because", cat: "Common Words" }, { bg: "ако", lat: "a<strong>ko</strong>", en: "if", cat: "Common Words" },
+    { bg: "че", lat: "<strong>che</strong>", en: "that (conj)", cat: "Common Words" }, { bg: "въпреки че", lat: "<strong>vap</strong>reki che", en: "although", cat: "Common Words" }, { bg: "докато", lat: "do<strong>ka</strong>to", en: "while/until", cat: "Common Words" },
+    { bg: "за да", lat: "za <strong>da</strong>", en: "in order to", cat: "Common Words" }, { bg: "следователно", lat: "sledova<strong>tel</strong>no", en: "therefore", cat: "Common Words" }, { bg: "също", lat: "<strong>sash</strong>to", en: "also/too", cat: "Common Words" },
+    { bg: "така", lat: "ta<strong>ka</strong>", en: "so/thus", cat: "Common Words" }, { bg: "както", lat: "<strong>kak</strong>to", en: "as/like", cat: "Common Words" },
+    // Quantifiers
+    { bg: "много", lat: "<strong>mno</strong>go", en: "a lot/very", cat: "Common Words" }, { bg: "малко", lat: "<strong>mal</strong>ko", en: "a little", cat: "Common Words" }, { bg: "повече", lat: "<strong>po</strong>veche", en: "more", cat: "Common Words" },
+    { bg: "по-малко", lat: "po-<strong>mal</strong>ko", en: "less", cat: "Common Words" }, { bg: "доста", lat: "<strong>dos</strong>ta", en: "quite/enough", cat: "Common Words" }, { bg: "толкова", lat: "<strong>tol</strong>kova", en: "so much", cat: "Common Words" },
+    { bg: "съвсем", lat: "sav<strong>sem</strong>", en: "completely", cat: "Common Words" }, { bg: "почти", lat: "poch<strong>ti</strong>", en: "almost", cat: "Common Words" }, { bg: "твърде", lat: "<strong>tvar</strong>de", en: "too (much)", cat: "Common Words" },
+    // Indefinite/Negative
+    { bg: "някой", lat: "<strong>nya</strong>koy", en: "someone", cat: "Common Words" }, { bg: "нещо", lat: "<strong>nesh</strong>to", en: "something", cat: "Common Words" }, { bg: "някъде", lat: "<strong>nya</strong>kade", en: "somewhere", cat: "Common Words" },
+    { bg: "никой", lat: "<strong>ni</strong>koy", en: "no one", cat: "Common Words" }, { bg: "нищо", lat: "<strong>nish</strong>to", en: "nothing", cat: "Common Words" }, { bg: "никъде", lat: "<strong>ni</strong>kade", en: "nowhere", cat: "Common Words" },
+    { bg: "всеки", lat: "<strong>vse</strong>ki", en: "everyone/every", cat: "Common Words" }, { bg: "всичко", lat: "<strong>vsich</strong>ko", en: "everything", cat: "Common Words" },
+    // Conversational
+    { bg: "да", lat: "<strong>da</strong>", en: "yes", cat: "Common Words" }, { bg: "не", lat: "<strong>ne</strong>", en: "no", cat: "Common Words" }, { bg: "добре", lat: "dob<strong>re</strong>", en: "well/good (okay)", cat: "Common Words" },
+    { bg: "може би", lat: "<strong>mo</strong>zhe bi", en: "maybe", cat: "Common Words" }, { bg: "сигурно", lat: "<strong>si</strong>gurno", en: "surely/probably", cat: "Common Words" }, { bg: "разбира се", lat: "raz<strong>bi</strong>ra se", en: "of course", cat: "Common Words" },
+    { bg: "наистина", lat: "na<strong>is</strong>tina", en: "really", cat: "Common Words" }, { bg: "може", lat: "<strong>mo</strong>zhe", en: "can/it is possible", cat: "Common Words" }, { bg: "трябва", lat: "<strong>tryab</strong>va", en: "must/should", cat: "Common Words" },
+    { bg: "няма", lat: "<strong>nya</strong>ma", en: "there isn't", cat: "Common Words" }, { bg: "има", lat: "<strong>i</strong>ma", en: "there is/are", cat: "Common Words" }, { bg: "ето", lat: "<strong>e</strong>to", en: "here is (voila)", cat: "Common Words" },
+    { bg: "нали", lat: "na<strong>li</strong>", en: "right? (tag)", cat: "Common Words" }, { bg: "значи", lat: "<strong>zna</strong>chi", en: "it means/so", cat: "Common Words" }, { bg: "извинете", lat: "izvi<strong>ne</strong>te", en: "excuse me", cat: "Common Words" },
+    { bg: "благодаря", lat: "blagoda<strong>rya</strong>", en: "thank you", cat: "Common Words" }, { bg: "моля", lat: "<strong>mo</strong>lya", en: "please/you're welcome", cat: "Common Words" }, { bg: "здравей", lat: "zdra<strong>vey</strong>", en: "hello", cat: "Common Words" },
+    { bg: "чао", lat: "<strong>chao</strong>", en: "bye", cat: "Common Words" }
 ];
