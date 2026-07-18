@@ -4,7 +4,7 @@ import { vocabulary } from '../../data/vocabulary';
 import {
     Shuffle, Folder, ChevronDown, Hash, Palette,
     Users, UtensilsCrossed, Package, Heart,
-    Zap, Clock, MapPin, Star, Volume2
+    Zap, Clock, MapPin, Star, Volume2, Sparkles
 } from 'lucide-react';
 import { containerVariants, itemVariants } from '../../data/animations';
 import { triggerHaptic } from '../../utils/haptics';
@@ -13,11 +13,12 @@ const FlashcardGame = () => {
     const [activeDeck, setActiveDeck] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isFlipped, setIsFlipped] = useState(false);
-    const [category, setCategory] = useState("Numbers");
-    const [isRandom, setIsRandom] = useState(true);
+    const [category, setCategory] = useState("Common Words");
+    const [isRandom, setIsRandom] = useState(false);
 
     // Categories and their icons
     const categoryIcons = {
+        "Common Words": Sparkles,
         "Numbers": Hash,
         "Colors": Palette,
         "Family": Users,
