@@ -8,20 +8,24 @@ import PracticeSection from './components/Practice/PracticeSection';
 import FlashcardGame from './components/Flashcards/FlashcardGame';
 
 function App() {
-  const [activeTab, setActiveTab] = useState('learn');
-  const [selectedUnit, setSelectedUnit] = useState(null);
+  const [activeTab, setActiveTab] = useState(() => sessionStorage.getItem('activeTab') || 'learn');
+  const [selectedUnit, setSelectedUnit] = useState(() => sessionStorage.getItem('selectedUnit') || null);
   const [practiceReset, setPracticeReset] = useState(0);
 
   // Sync state with history on mount and on popstate (back button)
   useEffect(() => {
-    // Initial state
-    const initialState = { tab: 'learn', unit: null };
+    // Restore history state without overwriting the current position
+    const initialState = { tab: activeTab, unit: selectedUnit };
     window.history.replaceState(initialState, '');
 
     const handlePopState = (event) => {
       if (event.state) {
-        setActiveTab(event.state.tab || 'learn');
-        setSelectedUnit(event.state.unit || null);
+        const tab = event.state.tab || 'learn';
+        const unit = event.state.unit || null;
+        setActiveTab(tab);
+        setSelectedUnit(unit);
+        sessionStorage.setItem('activeTab', tab);
+        sessionStorage.setItem('selectedUnit', unit || '');
       }
     };
 
@@ -34,18 +38,22 @@ function App() {
       if (tab === 'learn' && selectedUnit) {
         // Going back from detail to list
         setSelectedUnit(null);
+        sessionStorage.setItem('selectedUnit', '');
         window.history.pushState({ tab: 'learn', unit: null }, '');
       }
       if (tab === 'practice') setPracticeReset(prev => prev + 1);
     } else {
       setActiveTab(tab);
       setSelectedUnit(null);
+      sessionStorage.setItem('activeTab', tab);
+      sessionStorage.setItem('selectedUnit', '');
       window.history.pushState({ tab: tab, unit: null }, '');
     }
   };
 
   const handleSelectUnit = (unitId) => {
     setSelectedUnit(unitId);
+    sessionStorage.setItem('selectedUnit', unitId);
     window.history.pushState({ tab: 'learn', unit: unitId }, '');
   };
 
