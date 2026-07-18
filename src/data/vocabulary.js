@@ -152,8 +152,8 @@ export const vocabulary = [
     { bg: "вие", lat: "<strong>vi</strong>e", en: "you (pl/formal)", cat: "Common Words" }, { bg: "те", lat: "<strong>te</strong>", en: "they", cat: "Common Words" }, 
     { bg: "ме", lat: "<strong>me</strong>", en: "me (obj)", cat: "Common Words" }, { bg: "го", lat: "<strong>go</strong>", en: "him/it (obj)", cat: "Common Words" }, { bg: "я", lat: "<strong>ya</strong>", en: "her (obj)", cat: "Common Words" },
     { bg: "ни", lat: "<strong>ni</strong>", en: "us (obj)", cat: "Common Words" }, { bg: "ви", lat: "<strong>vi</strong>", en: "you (obj pl)", cat: "Common Words" }, { bg: "ги", lat: "<strong>gi</strong>", en: "them (obj)", cat: "Common Words" },
-    { bg: "ми", lat: "<strong>mi</strong>", en: "to me / my", cat: "Common Words" }, { bg: "му", lat: "<strong>mu</strong>", en: "to him / his", cat: "Common Words" }, { bg: "ѝ", lat: "<strong>i</strong>", en: "to her / her", cat: "Common Words" },
-    { bg: "им", lat: "<strong>im</strong>", en: "to them / their", cat: "Common Words" },
+    { bg: "ми", lat: "<strong>mi</strong>", en: "to me (dat.)", cat: "Common Words" }, { bg: "му", lat: "<strong>mu</strong>", en: "to him (dat.)", cat: "Common Words" }, { bg: "ѝ", lat: "<strong>i</strong>", en: "to her (dat.)", cat: "Common Words" },
+    { bg: "им", lat: "<strong>im</strong>", en: "to them (dat.)", cat: "Common Words" },
     // Demonstratives
     { bg: "този", lat: "<strong>to</strong>zi", en: "this (m)", cat: "Common Words" }, { bg: "тази", lat: "<strong>ta</strong>zi", en: "this (f)", cat: "Common Words" }, { bg: "това", lat: "to<strong>va</strong>", en: "this (n) / that", cat: "Common Words" },
     { bg: "тези", lat: "<strong>te</strong>zi", en: "these", cat: "Common Words" }, { bg: "онзи", lat: "<strong>on</strong>zi", en: "that (m)", cat: "Common Words" }, { bg: "онази", lat: "o<strong>na</strong>zi", en: "that (f)", cat: "Common Words" },
