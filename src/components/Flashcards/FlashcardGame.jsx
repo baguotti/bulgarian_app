@@ -87,6 +87,13 @@ const FlashcardGame = () => {
         }
     };
 
+    const prevCard = () => {
+        triggerHaptic('medium');
+        setIsFlipped(false);
+        // In shuffle mode, since we don't have history tracking, going back sequentially is the most logical fallback
+        setCurrentIndex(prev => (prev - 1 + activeDeck.length) % activeDeck.length);
+    };
+
     const speak = (text) => {
         triggerHaptic('light');
         if (!window.speechSynthesis) return;
@@ -244,10 +251,29 @@ const FlashcardGame = () => {
             </motion.div>
 
             {/* The Flashcard */}
-            <motion.div className="flashcard" onClick={() => {
-                triggerHaptic('light');
-                setIsFlipped(!isFlipped);
-            }} variants={itemVariants}>
+            <motion.div 
+                className="flashcard" 
+                drag="x"
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={0.6}
+                onDragEnd={(event, info) => {
+                    const swipeThreshold = 50;
+                    if (info.offset.x > swipeThreshold) {
+                        // Swiped right -> Next Word
+                        nextCard();
+                    } else if (info.offset.x < -swipeThreshold) {
+                        // Swiped left -> Previous Word
+                        prevCard();
+                    }
+                }}
+                onClick={() => {
+                    triggerHaptic('light');
+                    setIsFlipped(!isFlipped);
+                }} 
+                variants={itemVariants}
+                style={{ touchAction: 'none', cursor: 'grab' }}
+                whileTap={{ cursor: 'grabbing' }}
+            >
                 <div className={`flashcard-inner ${isFlipped ? 'flipped' : ''}`}>
                     <div className="flashcard-front">
                         {/* Speaker Toggle */}
@@ -273,7 +299,7 @@ const FlashcardGame = () => {
                             <Volume2 size={20} />
                         </button>
                         <div style={{ fontSize: '2.5rem', fontWeight: 800 }}>{card.bg}</div>
-                        <div style={{ color: 'var(--accent-color)', marginTop: '1rem' }}>Tap to flip</div>
+                        <div style={{ color: 'var(--accent-color)', marginTop: '1rem' }}>Tap to flip, swipe to navigate</div>
                     </div>
                     <div className="flashcard-back">
                         <div style={{ textAlign: 'center', width: '100%' }}>
@@ -285,9 +311,12 @@ const FlashcardGame = () => {
             </motion.div>
 
             {/* Controls */}
-            <motion.div variants={itemVariants} style={{ marginTop: '1.5rem', textAlign: 'center' }}>
-                <button className="action-btn" onClick={(e) => { e.stopPropagation(); nextCard(); }}>
-                    Next Word →
+            <motion.div variants={itemVariants} style={{ marginTop: '1.5rem', display: 'flex', gap: '1rem', justifyContent: 'center' }}>
+                <button className="action-btn" style={{ flex: 1, backgroundColor: 'transparent', border: '1px solid var(--border-color)', color: 'var(--text-secondary)' }} onClick={(e) => { e.stopPropagation(); prevCard(); }}>
+                    ← Prev
+                </button>
+                <button className="action-btn" style={{ flex: 2 }} onClick={(e) => { e.stopPropagation(); nextCard(); }}>
+                    Next →
                 </button>
             </motion.div>
         </motion.section>
