@@ -13,6 +13,7 @@ const FlashcardGame = () => {
     const [activeDeck, setActiveDeck] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isFlipped, setIsFlipped] = useState(false);
+    const [showContext, setShowContext] = useState(false);
     const [category, setCategory] = useState("Common Words");
     // mode: 'category' | 'shuffle-category' | 'shuffle-all'
     const [mode, setMode] = useState('category');
@@ -58,6 +59,7 @@ const FlashcardGame = () => {
         setActiveDeck(deck);
         setCurrentIndex(0);
         setIsFlipped(false);
+        setShowContext(false);
     };
 
     const handleCategoryChange = (newCat) => {
@@ -79,6 +81,7 @@ const FlashcardGame = () => {
     const nextCard = () => {
         triggerHaptic('medium');
         setIsFlipped(false);
+        setShowContext(false);
         // In any shuffle mode, pick a new random card; in ordered mode, go sequential
         if (mode === 'shuffle-category' || mode === 'shuffle-all') {
             setCurrentIndex(Math.floor(Math.random() * activeDeck.length));
@@ -90,6 +93,7 @@ const FlashcardGame = () => {
     const prevCard = () => {
         triggerHaptic('medium');
         setIsFlipped(false);
+        setShowContext(false);
         // In shuffle mode, since we don't have history tracking, going back sequentially is the most logical fallback
         setCurrentIndex(prev => (prev - 1 + activeDeck.length) % activeDeck.length);
     };
@@ -253,17 +257,26 @@ const FlashcardGame = () => {
             {/* The Flashcard */}
             <motion.div 
                 className="flashcard" 
-                drag="x"
-                dragConstraints={{ left: 0, right: 0 }}
+                drag
+                dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
                 dragElastic={0.6}
                 onDragEnd={(event, info) => {
-                    const swipeThreshold = 50;
-                    if (info.offset.x > swipeThreshold) {
+                    const swipeThresholdX = 50;
+                    const swipeThresholdY = 50;
+                    if (info.offset.x > swipeThresholdX) {
                         // Swiped right -> Next Word
                         nextCard();
-                    } else if (info.offset.x < -swipeThreshold) {
+                    } else if (info.offset.x < -swipeThresholdX) {
                         // Swiped left -> Previous Word
                         prevCard();
+                    } else if (info.offset.y < -swipeThresholdY) {
+                        // Swiped up -> Show Context
+                        triggerHaptic('medium');
+                        setShowContext(true);
+                    } else if (info.offset.y > swipeThresholdY) {
+                        // Swiped down -> Hide Context
+                        triggerHaptic('light');
+                        setShowContext(false);
                     }
                 }}
                 onClick={() => {
@@ -299,12 +312,35 @@ const FlashcardGame = () => {
                             <Volume2 size={20} />
                         </button>
                         <div style={{ fontSize: '2.5rem', fontWeight: 800 }}>{card.bg}</div>
-                        <div style={{ color: 'var(--accent-color)', marginTop: '1rem' }}>Tap to flip, swipe to navigate</div>
+                        
+                        {showContext && card.example && (
+                            <motion.div 
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                style={{ marginTop: '2rem', padding: '1rem', background: 'rgba(99, 133, 139, 0.1)', borderRadius: '12px', width: '90%' }}
+                            >
+                                <div style={{ fontSize: '1.2rem', fontWeight: 600, color: 'var(--text-color)' }}>{card.example.bg}</div>
+                                <div style={{ fontSize: '1rem', color: 'var(--text-secondary)', marginTop: '0.5rem' }}>{card.example.en}</div>
+                            </motion.div>
+                        )}
+                        
+                        {!showContext && <div style={{ color: 'var(--accent-color)', marginTop: '1rem' }}>Tap to flip, swipe ↔ to navigate, ↑ for example</div>}
                     </div>
                     <div className="flashcard-back">
-                        <div style={{ textAlign: 'center', width: '100%' }}>
+                        <div style={{ textAlign: 'center', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                             <div style={{ fontSize: '2.5rem', fontWeight: 500, textAlign: 'center', color: '#FFFFFF' }} dangerouslySetInnerHTML={{ __html: card.lat }} />
                             <div style={{ color: 'var(--accent-color)', marginTop: '1rem', textAlign: 'center', fontWeight: 600 }}>{card.en}</div>
+                            
+                            {showContext && card.example && (
+                                <motion.div 
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    style={{ marginTop: '2rem', padding: '1rem', background: 'rgba(255, 255, 255, 0.1)', borderRadius: '12px', width: '90%' }}
+                                >
+                                    <div style={{ fontSize: '1.2rem', fontWeight: 600, color: '#FFFFFF' }}>{card.example.bg}</div>
+                                    <div style={{ fontSize: '1rem', color: 'rgba(255, 255, 255, 0.8)', marginTop: '0.5rem' }}>{card.example.en}</div>
+                                </motion.div>
+                            )}
                         </div>
                     </div>
                 </div>
