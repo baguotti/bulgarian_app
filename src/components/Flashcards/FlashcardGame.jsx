@@ -79,18 +79,12 @@ const FlashcardGame = () => {
     const nextCard = () => {
         triggerHaptic('medium');
         setIsFlipped(false);
-        // In any shuffle mode, pick a new random card; in ordered mode, go sequential
-        if (mode === 'shuffle-category' || mode === 'shuffle-all') {
-            setCurrentIndex(Math.floor(Math.random() * activeDeck.length));
-        } else {
-            setCurrentIndex(prev => (prev + 1) % activeDeck.length);
-        }
+        setCurrentIndex(prev => (prev + 1) % activeDeck.length);
     };
 
     const prevCard = () => {
         triggerHaptic('medium');
         setIsFlipped(false);
-        // In shuffle mode, since we don't have history tracking, going back sequentially is the most logical fallback
         setCurrentIndex(prev => (prev - 1 + activeDeck.length) % activeDeck.length);
     };
 
