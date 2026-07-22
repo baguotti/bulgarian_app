@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { Timer, Flame } from 'lucide-react';
 
 const StatsSection = ({ usage }) => {
-  const { dailySeconds, totalSeconds, progressPercent, goalReached, goalMinutes } = usage;
+  const { dailySeconds, totalSeconds, progressPercent, goalReached, goalMinutes, streak } = usage;
 
   const formatTime = (totalSecs) => {
     const hours = Math.floor(totalSecs / 3600);
@@ -15,6 +15,7 @@ const StatsSection = ({ usage }) => {
 
   const dailyMinutes = Math.floor(dailySeconds / 60);
   const strokeDashoffset = 283 - (283 * progressPercent) / 100;
+  const currentStreak = streak || 1;
 
   return (
     <motion.div 
@@ -63,7 +64,7 @@ const StatsSection = ({ usage }) => {
           <Flame className="stat-icon" />
           <div className="stat-info">
             <span className="stat-label">Streak</span>
-            <span className="stat-value">1 Day</span>
+            <span className="stat-value">{currentStreak} {currentStreak === 1 ? 'Day' : 'Days'}</span>
           </div>
         </div>
       </div>

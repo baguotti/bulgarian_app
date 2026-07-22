@@ -252,11 +252,11 @@ const FlashcardGame = () => {
                 dragElastic={0.6}
                 onDragEnd={(event, info) => {
                     const swipeThresholdX = 50;
-                    if (info.offset.x > swipeThresholdX) {
-                        // Swiped right -> Next Word
+                    if (info.offset.x < -swipeThresholdX) {
+                        // Swiped left (drag left) -> Next Word
                         nextCard();
-                    } else if (info.offset.x < -swipeThresholdX) {
-                        // Swiped left -> Previous Word
+                    } else if (info.offset.x > swipeThresholdX) {
+                        // Swiped right (drag right) -> Previous Word
                         prevCard();
                     }
                 }}

@@ -4,25 +4,53 @@ const STORAGE_KEY = 'bg_app_usage_stats';
 const DAILY_GOAL_MINUTES = 10;
 const DAILY_GOAL_SECONDS = DAILY_GOAL_MINUTES * 60;
 
+const getLocalDateString = (d = new Date()) => {
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
+
+const getYesterdayDateString = (todayStr) => {
+  const [year, month, day] = todayStr.split('-').map(Number);
+  const d = new Date(year, month - 1, day);
+  d.setDate(d.getDate() - 1);
+  return getLocalDateString(d);
+};
+
 export function useAppUsageTracker() {
   const [stats, setStats] = useState(() => {
     const saved = localStorage.getItem(STORAGE_KEY);
-    const today = new Date().toISOString().split('T')[0];
+    const today = getLocalDateString();
     
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
+        const savedStreak = parsed.streak || 1;
+
         if (parsed.date === today) {
-          return parsed;
+          return {
+            streak: 1,
+            ...parsed
+          };
         } else {
-          // New day, reset daily but keep total
-          return { date: today, dailySeconds: 0, totalSeconds: parsed.totalSeconds || 0 };
+          const yesterday = getYesterdayDateString(today);
+          let streak = 1;
+          if (parsed.date === yesterday && (parsed.dailySeconds > 0 || parsed.totalSeconds > 0)) {
+            streak = savedStreak + 1;
+          }
+          return { 
+            date: today, 
+            dailySeconds: 0, 
+            totalSeconds: parsed.totalSeconds || 0,
+            streak 
+          };
         }
       } catch (e) {
         console.error('Failed to parse usage stats', e);
       }
     }
-    return { date: today, dailySeconds: 0, totalSeconds: 0 };
+    return { date: today, dailySeconds: 0, totalSeconds: 0, streak: 1 };
   });
 
   const lastUpdateRef = useRef(Date.now());
@@ -40,14 +68,17 @@ export function useAppUsageTracker() {
       
       if (deltaSeconds > 0) {
         setStats(prev => {
-          const today = new Date().toISOString().split('T')[0];
+          const today = getLocalDateString();
           
           // Handle day rollover while app is open
           if (prev.date !== today) {
+            const yesterday = getYesterdayDateString(today);
+            const streak = (prev.date === yesterday && prev.dailySeconds > 0) ? (prev.streak || 1) + 1 : 1;
             return {
               date: today,
               dailySeconds: deltaSeconds,
-              totalSeconds: prev.totalSeconds + deltaSeconds
+              totalSeconds: prev.totalSeconds + deltaSeconds,
+              streak
             };
           }
           
